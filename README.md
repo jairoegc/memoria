@@ -6,7 +6,7 @@ Las versiones disponibles corresponden a capítulos terminados y corregidos. Cad
 
 ## Herramientas de compilación
 
-Para este proyecto se utilizó TexStudi 3.0.1 y MikTex 2.9, en Windows 10.
+Para este proyecto se utilizó TexStudio 3.0.1 y MikTex 2.9, en Windows 10.
 
 ## Author
 
