@@ -2,8 +2,6 @@
 
 En este repositorio de alberga el texto escrito en LaTex para el proyecto de titulación "Sistema de Adquisición de Datos para Detectores de Muones.
 
-Las versiones disponibles corresponden a capítulos terminados y corregidos. Cada versión incluye un nuevo capítulo junto a los publicados en versiones anteriores.
-
 ## Herramientas de compilación
 
 Para este proyecto se utilizó TexStudio 3.0.1 y MikTex 2.9, en Windows 10.
