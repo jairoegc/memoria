@@ -19,6 +19,7 @@
 \def\listtablename{ÍNDICE DE TABLAS}%
 \def\listfigurename{ÍNDICE DE FIGURAS}
 }
+
 \renewcommand{\listfigurename}{ÍNDICE DE FIGURAS}
 \renewcommand{\listtablename}{ÍNDICE DE TABLAS}
 
@@ -41,7 +42,6 @@
 \definecolor{colore}{RGB}{120,14,190}
 \definecolor{colorf}{RGB}{30,76,201}
 
-%\hyphenation{CONICYT Marco trans-fe-ren-cia pre-li-mi-na-res co-rres-pon-dien-tes de-no-mi-na-dor MIMO res-pec-ti-va-mente}
 \renewcommand\thesubsubsection{\Alph{subsubsection}}
 
 \addtolength{\topmargin}{-30pt}
@@ -66,19 +66,17 @@ output/.style= {coordinate},
 pinstyle/.style = {pin edge={to-,thin,black}}
 }
 
-%\layout
+%%--------------------PORTADA--------------------------------
 
-%--------------------PORTADA--------------------------------
+\setcounter{tocdepth}{2}
+\input{tex/Portada.tex}
 
-%\setcounter{tocdepth}{2}
-%\input{0_Portada.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
 
 
-%--------------------AGRADECIMIENTOS----------------------
+%%--------------------AGRADECIMIENTOS----------------------
 
 \pagestyle{fancyplain}
 \pagenumbering{roman}
@@ -86,199 +84,194 @@ pinstyle/.style = {pin edge={to-,thin,black}}
 \newpage
 
 
-%\chapter*{Agradecimientos}
-%\input{Agradecimientos.tex}
-%\afterpage{\thispagestyle{empty}\null\newpage}
+\chapter*{Agradecimientos}
+\input{tex/Agradecimientos.tex}
+\afterpage{\thispagestyle{empty}\null\newpage}
 
 
-%--------------------RESUMEN----------------------
+%%--------------------RESUMEN----------------------
 
-%\chapter*{Resumen}
-%\input{Resumen.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter*{Abstract}
-%\input{Abstract.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
+\chapter*{Resumen}
+\input{tex/Resumen.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter*{Abstract}
+\input{tex/Abstract.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
 %%--------------------ÍNDICE---------------------------------
-%\listoffigures
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\listoftables
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\tableofcontents
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
+\listoffigures
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\listoftables
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\tableofcontents
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
 
 %%-------------------CAPÍTULOS-------------------------------
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \pagenumbering{arabic}
 
-%\chapter{Introducción}
-%\label{cap:introduccion}
-%\input{1_Introduccion.tex}
+\chapter{Introducción}
+\label{cap:introduccion}
+\input{tex/Introduccion.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+%\chapter{Marco teórico}
+%\label{cap:marco}
+%\input{tex/MarcoTeorico.tex}
 %
 %\newpage
 %\thispagestyle{empty}
 %\cleardoublepage
-%
-%\chapter{Estado del arte}
-%\label{cap:art}
-%\input{2_EstadoArte.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Alternativas de Solución}
-%\label{cap:alternatives}
-%\input{3_AlternativasSolucion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Selección de Alternativa}
-%\label{cap:selection}
-%\input{4_SeleccionAlternativa.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
+
+\chapter{Estado del arte}
+\label{cap:art}
+\input{tex/EstadoArte.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Arquitectura propuesta}
+\label{cap:arq}
+\input{tex/ArquitecturaPropuesta.tex}
+
+
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
 
 \chapter{Detección}
 \label{cap:stgc}
-\input{5_Deteccion.tex}
+\input{tex/Deteccion.tex}
 
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Lectura}
-%\label{cap:asd}
-%\input{6_Lectura.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Muestreo}
-%\label{cap:samplig}
-%\input{7_Muestreo.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Discriminación}
-%\label{cap:discriminator}
-%\input{8_Discriminacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Estructuración}
-%\label{cap:structure}
-%\input{9_Estructuracion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%
-%\chapter{Análisis}
-%\label{cap:analysis}
-%\input{10_Analisis.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Sincronización}
-%\label{cap:sync}
-%\input{11_Sincronizacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Comunicación}
-%\label{cap:comm}
-%\input{12_Comunicacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Pruebas}
-%\label{cap:test}
-%\input{13_Comunicacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Resultados}
-%\label{cap:insights}
-%\input{14_Resultados.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Conclusiones}
-%\label{cap:conclusiones}
-%\input{15_Conclusiones.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%
-%%%%------------------APÉNDICES--------------------------------
-%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%\appendix
-%\chapter{Control de versiones de proyectos Vivado con Git}
-%\label{git}
-%\input{Appx_git.tex}
-%
-%\chapter{Conexión de señales LVDS en una FPGA Artix 7}
-%\label{lvds}
-%\input{Appx_lvds.tex}
-%
-%\chapter{Ajuste de forma en pulsos electrónicos para la física}
-%\label{shaping}
-%\input{Appx_shaping.tex}
-%
-%\chapter{Rayos cósmicos y partículas de alta energía}
-%\label{muon}
-%\input{Appx_muon.tex}
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
 
-%%
-%%%%------------------BIBLIOGRAFÍA-----------------------------
-%%%
+\chapter{Lectura}
+\label{cap:asd}
+\input{tex/Lectura.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Muestreo}
+\label{cap:sampling}
+\input{tex/Muestreo.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Discriminación}
+\label{cap:discriminator}
+\input{tex/Discriminacion.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Estructuración}
+\label{cap:structure}
+\input{tex/Estructuracion.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+
+\chapter{Análisis}
+\label{cap:analysis}
+\input{tex/Analisis.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Sincronización}
+\label{cap:sync}
+\input{tex/Sincronizacion.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Comunicación}
+\label{cap:comm}
+\input{tex/Comunicacion.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Pruebas}
+\label{cap:test}
+\input{tex/Comunicacion.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Resultados}
+\label{cap:insights}
+\input{tex/Resultados.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Conclusiones}
+\label{cap:conclusiones}
+\input{tex/Conclusiones.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+
+%%%------------------APÉNDICES--------------------------------
+
+\appendix
+\chapter{Control de versiones de proyectos Vivado con Git}
+\label{git}
+\input{tex/Appx_git.tex}
+
+\chapter{Conexión de señales LVDS en una FPGA Artix 7}
+\label{lvds}
+\input{tex/Appx_lvds.tex}
+
+\chapter{Ajuste de forma en pulsos electrónicos para la física}
+\label{shaping}
+\input{tex/Appx_shaping.tex}
+
+\chapter{Rayos cósmicos y partículas de alta energía}
+\label{muon}
+\input{tex/Appx_muon.tex}
+
+%%%------------------BIBLIOGRAFÍA-----------------------------
 
 \bibliographystyle{IEEEtran}
 \bibliography{references}
