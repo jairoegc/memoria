@@ -1,71 +1,71 @@
-%Introducción
+En este documento se detalla el trabajo realizado en torno al diseño de un sistema de adquisición de datos para detectores de muones, incluyendo antecedentes y detalles del diseño propuesto. El sistema fue implementado en una FPGA mediante Systemverilog, un lenguaje de descripción de \textit{hardware}.
 
-El presente capítulo relata las principales motivaciones que originan este proyecto de titulación, el planteamiento del problema, sus alcances y las contribuciones asociadas, además de indicar el detalle de cada capítulo incluido en el documento general. 
+El presente capítulo relata el contexto, las principales motivaciones que originan este proyecto de titulación, el planteamiento del problema, sus alcances y las contribuciones asociadas. Al final del capítulo se incluye además la organización del documento y detalles de cada capítulo.
 
+\section{Contexto}
+	El planeta tierra es constantemente bombardeado por rayos cósmicos. Estos provienen del espacio exterior y corresponden principalmente a partículas cargadas, como protones y núcleos atómicos. Se caracterizan por viajar a grandes velocidades, por lo cual también son llamadas partículas de alta energía.
+	
+	Los rayos incidentes interactúan con la atmósfera, produciendo la ionización del medio y decayendo en partículas secundarias. Estas últimas vuelven a interactuar con otras, generando una efecto en cadena y produciendo así una lluvia de partículas subatómicas sobre la corteza terrestre. La figura \ref{img:cosmic-ray} corresponde a una representación artística de la lluvia de partículas originada por radiación cósmica.
+	
+	Cerca del 70\% de las partículas que logran llegar a la superficie del planeta corresponden a muones. Estos poseen la misma carga que un electrón, pero con una masa cerca de 200 veces mayor. Esta característica, sumada a su altísima velocidad, permite que los muones pasen a través de la materia. Incluso, son capaces de alcanzar zonas bajo tierra durante el transcurso de su vida media, correspondiente a aproximadamente $2\mu s$.
+	
+	Al atravesar materia, los muones son absorbidos o su energía se ve disminuida. Detectarlos y medir su energía permite entonces conocer propiedades de la materia que ha sido atravesada por estas partículas. Por ejemplo, es posible realizar un mapa de densidad de terreno a partir de los cruces de muones, proceso conocido como muongrafía o tomografía muónica.
+	
+	Para llevar a cabo mediciones y análisis de detección de muones se requieren detectores, interfaces de lectura, análisis computacional, y por supuesto, un sistema de adquisición de datos capaz de  transformar las características físicas de eventos detectados a datos computables y analizables para extracción e interpretación de la información.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.4]{cosmic_rays.jpg}
+		\caption{Representación artística de rayos cósmicos y lluvia de partículas subatómicas sobre la corteza terrestre.}
+		\label{img:cosmic-ray}
+	\end{figure}
+	
+	
 \section{Motivación}
-	\par El proyecto ``Sistema de adquisición de datos para detectores de muones'' nace como un requerimiento del Centro Científico Tecnológico de Valparaíso (CCTVal) para aplicaciones de física de partículas, en el marco del proyecto ``sTGC Minería''. 
+	El ``Sistema de adquisición de datos para detectores de muones'' nace como un requerimiento del Centro Científico Tecnológico de Valparaíso (CCTVal) para aplicaciones de física de partículas, en el marco del proyecto ``sTGC Minería''. 
 	
-	\par Uno de los objetivos principales de ``sTGC Minería'' es realizar tomografías muónicas de terreno minero mediante detectores de partículas provenientes de radiación cósmica, idea similar a la que se utiliza para encontrar criptas y cavernas en pirámides egipcias. La detección de estos muones implica una serie de etapas y detectores desarrollados con tecnologías que se utilizan en experimentos tales como ATLAS, en CERN. Particularmente en ``sTGC Minería'', se requiere un sistema que sea capaz de captar las señales generadas por los detectores y que determine de manera fiable y precisa aquellas zonas del detector por las cuales ha pasado un muón.
+	Uno de los objetivos principales de ``sTGC Minería'' es realizar tomografías muónicas de terreno minero detectando partículas que provengan de radiación cósmica, método similar al que se utiliza para encontrar criptas y cavernas en pirámides egipcias. Estas tomografías sientan las bases para la detección de cavernas subterráneas y estimación de densidad en terrenos mineros. La figura \ref{img:muongrafia} corresponde a una muongrafía de un corte trasversal de terreno.
 	
-	\par El proyecto ``Sistema de adquisición de datos para detectores de muones'' cumplirá con las funciones de adquirir, discriminar y analizar la información captada desde el detector, para así contribuir a la tomografía muónica del terreno.
+	Producto de la colaboración existente entre CCTVal y el experimento ATLAS, en CERN, el centro cuenta con las herramientas y conocimientos necesarios para la fabricación de detectores de muones en Chile. Los detectores de partículas a utilizar en ``sTGC Minería'' corresponden precisamente a unos basados en los detectores del espectrómetro de muones presente en el experimento ATLAS.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=1]{Stgcgif.jpg}
+		\caption{Imagen referencial de un mapa de calor para representación de densidades en un corte transversal de terreno.}
+		\label{img:muongrafia}
+	\end{figure}
+	
 
 \section{Planteamiento del Problema}
 \label{sec:planteamiento}
-	\par El presente proyecto tiene como objetivo principal detectar la posición del paso de muones en un detector de configuración matricial, indicando el o los cuadrantes que han sido excitados por el paso de las partículas de manera fiable y eficiente, logrando captar gran cantidad de señales de manera íntegra en el tiempo apropiado para ello.
-	\par Es requisito del proyecto que este sistema sea concebido como una herramienta adaptada para operar con detectores de mayor tamaño o con arreglos de detectores individuales, permitiendo el análisis de zonas de mayor área o el estudio de trayectorias de partículas con detectores superpuestos. Esto implica que el sistema debe ser de naturaleza modular y expandible, sobre todo en la cantidad de señales que es capaz de procesar.
-	\par Como objetivos secundarios, se espera que este proyecto sea una herramienta replicable y esté disponible para ser utilizado en nuevos proyectos y experimentos del centro de investigación. Se espera también que sea un aporte al conocimiento sobre la implementación de sistemas electrónicos para la detección y análisis de partículas utilizando estas tecnologías, ya que será uno de los primeros en ser desarrollados y probados por el centro.\\								
-
-
-%	\begin{figure}[H]
-%		\centering
-%		
-%		\tikzstyle{externo} = [rectangle, rounded corners, minimum width=2cm, minimum height=1cm,text centered, draw=black, fill=blue!30]
-%		\tikzstyle{fpga} = [rectangle, rounded corners, minimum width=3cm, minimum height=2.5cm,text centered, draw=black, fill=green!30]
-%		\tikzstyle{flecha} = [thick,->,>=stealth]   
-%		
-%		\begin{tikzpicture}[node distance=1.5cm, thick,scale=0.9, every node/.style={scale=0.9\\}]
-%			
-%			\node (disparo) [externo] {Disparo};
-%			\node (detector) [externo, below of=disparo] {Detector};
-%			\node (asd) [externo, right of=detector, xshift=1cm] {ASD};
-%			\node (disc) [fpga, right of=detector, xshift=2.5cm, yshift=-0.5cm, anchor=south west] {Discriminador};
-%			\node (pros) [fpga, right of=disc, xshift=2cm] {Procesamiento};
-%			\node (res) [fpga, right of=pros, xshift=2cm] {Análisis};
-%			
-%			\draw [flecha] (disparo) --  (disc.west |- disparo);
-%			\draw [flecha] (detector) -- (asd);
-%			\draw [flecha] (asd) -- (disc.west |- asd);
-%			\draw [flecha] (disc) -- (pros);
-%			\draw [flecha] (pros) -- (res);
-%			
-%		\end{tikzpicture}
-%		
-%		\caption{Diagrama de bloques del sistema. En azul se presentan las etapas previas al proyecto que ya se encuentran desarrolladas y sobre las cuales no se tiene control. En verde se ilustran las etapas pendientes y que pueden ser desarrolladas en este proyecto. El disparo corresponde a la señal digital que indica si la partícula detectada es un muón y el ASD es un acondicionador de señal que genera pulsos digitales a partir de los pulsos analógicos captados.}
-%		\label{fig:diagrama}
-%	\end{figure}
-
-%\section{Trabajo a Desarrollar}
-%
-%	\par Como primeras labores, será necesario aprender sobre la tecnología y el funcionamiento del detector para así asegurar que los datos están siendo tratados de manera adecuada. Esto implica conocer su resolución, la naturaleza de las señales y las restricciones de tiempo propias del sistema. 
-%	
-%	\par Posteriormente, se procederá a investigar sobre técnicas para la captación y procesamiento de estas señales, definiendo así las alternativas disponibles para realizar el proyecto. Es sabido que las tomografías por rayos cósmicos son tecnología existente, y se cuenta también con la existencia de aplicaciones que se han desarrollado en laboratorios de física de partículas europeos, como el CERN. Estas últimas tienen como preferencia la utilización de FPGA para el desarrollo de este tipo de sistemas.
-%	
-%	\par Una vez que se tengan claras la herramientas y requisitos, se definirá y planificará en detalle la solución a implementar de acuerdo a los objetivos del proyecto. Se estima que la implementación se llevará a cabo en una FPGA, lo que implicará definir los módulos que compondrán cada etapa del sistema antes de implementarlo como tal. En principio. estas etapas corresponderán a las de discriminación, procesamiento y análisis, como se ilustra en la figura \ref{fig:diagrama}. 
-%	
-%	\par Finalmente, se realizarán pruebas de manera incremental con cada una de las etapas a desarrollar. Estas pruebas se podrán realizar con partículas intencionalmente dirigidas hacia la superficie del detector y posteriormente con rayos cósmicos, para así comprobar y observar el correcto funcionamiento del sistema.
-%
-%\section{Evaluaciones a Realizar}
-%	
-%	\par En primera instancia, se evaluará la capacidad del sistema de adquirir señales provenientes del detector, con apoyo de partículas dirigidas a él mediante fuentes radioactivas. Luego, se podrá probar que las señales detectadas correspondan solo a muones, utilizando como referencia la señal de disparo existente para dicho fin, comprobando que no hayan falsos positivos y que no se pierdan señales que debieron ser consideradas por el sistema. Una vez que se tenga certeza del funcionamiento de la adquisición y discriminación de señales, se probará que el sistema sea capaz de identificar la posición de partículas por cuadrantes específicos del detector, también con apoyo de fuentes radioactivas. Finalmente, se pondrá a prueba la capacidad del sistema para entregar información completa sobre el paso de partículas en la superficie del detector.
+	La detección de muones implica una serie de etapas y detectores desarrollados con tecnologías que se utilizan en experimentos tales como ATLAS, en CERN. Particularmente en ``sTGC Minería'', se requiere un sistema que sea capaz de captar las señales generadas por los detectores y que determine de manera fiable y precisa aquellas zonas del detector por las cuales ha pasado un muon.
 	
+	El ``Sistema de adquisición de datos para detectores de muones'' cumplirá con las funciones de adquirir, discriminar y estructurar la información captada desde el detector, para así contribuir a la tomografía muónica del terreno.
 	
+ 	Como objetivo principal se tiene el detectar la posición del paso de muones en un detector de configuración matricial, indicando el o los cuadrantes que han sido excitados por el paso de las partículas, de manera fiable y eficiente, logrando captar gran cantidad de señales íntegramente.
+ 	
+ 	La figura \ref{img:sistema} ilustra el sistema de muongrafía de terreno considerando un solo detector de muones. Para su operación, utiliza dos detectores centelleantes secundarios, un sistema de coincidencias y una interfaz de lectura. El sistema de adquisición de datos capta y discrimina los pulsos generados según se correspondan con la señal de coincidencia asociada a los detectores centelleantes. La información resultante es comunicada a etapas posteriores para análisis de datos.
+	
+	Es requisito del proyecto que este sistema sea concebido como una herramienta adaptada para operar con detectores de mayor tamaño o con arreglos de detectores individuales, permitiendo el análisis de zonas de mayor área o el estudio de trayectorias de partículas con detectores superpuestos. Esto implica que el sistema debe ser de naturaleza modular y expansible, sobre todo en torno a la cantidad de señales que es capaz de procesar.
+	
+	Como objetivo secundario, el proyecto debe ser una herramienta replicable que esté disponible para ser utilizada en nuevos proyectos y experimentos del centro de investigación. Así mismo, el desarrollo y la documentación del proceso debe ser un aporte al conocimiento sobre la implementación de sistemas electrónicos para la detección y análisis de partículas utilizando estas tecnologías, ya que es uno de los primeros en ser desarrollados y probados por el centro.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[scale=0.55]{sistema.pdf}
+		\caption{Diagrama del sistema de muongrafía de terreno para un solo detector. Se incluyen en azul las formas de señal asociadas a la señal de disparo, eventos de detección, y lectura de pulsos.}
+		\label{img:sistema}
+	\end{figure}						
 
 \section{Alcances y contribuciones}
-	\par Se espera que este sistema sea capaz de generar información suficiente para representar la ubicación del paso de las partículas en la superficie del detector según la resolución de este.
-	\par El sistema deberá ser capaz de captar cantidades pares arbitrarias de canales, discriminando partículas mediante la utilización de las señales de disparo disponibles.
-	\par La información generada pasará a etapas siguientes de análisis detallado o de representación gráfica, por lo que se espera que el sistema sea capaz de entregar información pertinentemente ordenada, procesada y seleccionada para dichos fines.\\
-	 
-%La presente tesis se ordena como sigue: El capítulo \ref{cap:introduccion} presenta la introducción al tema,....
+	Se espera que este sistema sea capaz de generar información suficiente para representar la ubicación del paso de las partículas en la superficie del detector, determinando cuadrantes de $1cm^2$ que hayan sido excitados por el cruce de partículas.
+	
+	El sistema deberá ser capaz de captar cantidades pares arbitrarias de canales, discriminando partículas mediante la utilización de las señales de disparo disponibles.
+	
+	La información generada pasará a etapas siguientes de análisis detallado o de representación gráfica, por lo cual es importante que el sistema sea capaz de entregar información pertinentemente ordenada, procesada y seleccionada para dichos fines.
+	
+	Finalmente, uno de los principales aportes recae en la documentación respecto a entorno, operación y desarrollo del sistema en cuestión. Esto con el fin de facilitar la implementación del diseño en nuevos sistemas, permitir profundizar y mejorar la propuesta diseñada y entregar las herramientas al centro y a futuros estudiantes para operar dispositivos que posean etapas equivalentes.
+
 
 \section{Organización del documento.}
 
@@ -86,3 +86,4 @@ El presente capítulo relata las principales motivaciones que originan este proy
 		\item El \textbf{Capítulo \ref{cap:insights}} resume los resultados de experimentación y desempeño del sistema diseñado.
 		\item El \textbf{Capítulo \ref{cap:conclusiones}} incluye las conclusiones finales y trabajo futuro propuesto a partir de lo realizado en este proyecto de titulación.
 	\end{itemize}
+
