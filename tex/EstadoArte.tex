@@ -23,10 +23,11 @@ En las siguientes páginas se mencionan distintos sistemas relacionados a esta t
 \newpage
 \section{PET 4D}
 	
-	\par Otro sistema de referencia es el DAQ para un detector PET 4D \cite{Marcatili2011DevelopmentDetector}, similar al LabPET II. Este dispositivo permite capturar gran cantidad de señales provenientes de arreglos matriciales de fotomultiplicadores. Se caracteriza principalmente por poseer una tarjeta madre central en la cual es posible conectar hasta 18 tarjetas de adquisición. Cada una de estas últimas cuenta con 8 o hasta 32 canales para la adquisición de pulsos provenientes del detector, encargándose de capturar, procesar y enviar información a la placa madre.
-	Las señales son capturadas por ASICs (Application Specific Integrated Circuits), muestreadas por conversores análogo-digitales, procesadas por una FPGA y controladas por otra FPGA (etiquetada como la placa madre). El procesamiento se encarga de calcular energía y datos temporales, mientras que el control final relaciona los eventos que hayan sido temporalmente coincidentes y calcula el tiempo de vuelvo de las partículas con apoyo de un conversor de tiempo a digital (TDC).
+	Otro sistema de referencia es el DAQ para un detector PET 4D \cite{Marcatili2011DevelopmentDetector}, similar al LabPET II. Este dispositivo permite capturar gran cantidad de señales provenientes de arreglos matriciales de fotomultiplicadores. Se caracteriza principalmente por poseer una tarjeta madre central en la cual es posible conectar hasta 18 tarjetas de adquisición. Cada una de estas últimas cuenta con 8 o hasta 32 canales para la adquisición de pulsos provenientes del detector, encargándose de capturar, procesar y enviar información a la placa madre.
 	
-	\par Este sistema destaca por su modularidad, la cual permite escalamiento. En contraste con LabPET II, se sustituye la serialización de datos con la presencia de varias placas adquisidoras de datos, preprocesando la información antes de llegar a la FPGA principal. Cabe destacar que esta arquitectura está relacionada con la necesidad de encontrar múltiples eventos simultáneos en distintas ubicaciones físicas, requerimiento que no está presente en el sistema que se planea diseñar para este proyecto de titulación. La figura \ref{fig:marcatili} ilustra la arquitectura de este sistema.
+	Las señales son capturadas por ASICs (\textit{Application Specific Integrated Circuits}), muestreadas por conversores análogo-digitales, procesadas por una FPGA y controladas por una FPGA principal (etiquetada como la placa madre). El procesamiento se encarga de calcular energía y datos temporales, mientras que el control final relaciona los eventos que hayan sido temporalmente coincidentes y calcula el tiempo de vuelvo de las partículas con apoyo de un conversor de tiempo a señal digital (TDC).
+	
+	Este sistema destaca por su modularidad, la cual permite escalamiento. En contraste con LabPET II, se sustituye la serialización de datos con la presencia de varias placas adquisidoras de datos, procesando la información antes de llegar a la FPGA principal. Cabe destacar que esta arquitectura está relacionada con la necesidad de encontrar múltiples eventos simultáneos en distintas ubicaciones físicas, requerimiento que no está presente en el sistema que se planea diseñar para este proyecto de titulación. La figura \ref{fig:marcatili} ilustra la arquitectura de este sistema.
 	
 	\begin{figure}[h]
 		\centering
@@ -38,32 +39,33 @@ En las siguientes páginas se mencionan distintos sistemas relacionados a esta t
 \newpage
 \section{ATLAS}
 	
-	\par Finalmente, la referencia más importante corresponde a la del experimento ATLAS, donde se utiliza la misma tecnología de detectores y la misma interfaz de adquisición (ASD) en una de sus etapas, como se mencionada en \cite{Spieler2012ElectronicsAcquisition}.
+	Finalmente, la referencia más importante corresponde a la del experimento ATLAS, donde se utiliza la misma tecnología de detectores y la misma interfaz de adquisición (ASD) en una de sus etapas, como se mencionada en \cite{Spieler2012ElectronicsAcquisition}.
 	
-	\par Este experimento intercepta grupos de partículas provenientes de haces de protones acelerados en el Gran Colisionador de Hadrones (LHC) en CERN. Estos grupos de partículas producen colisiones espaciadas en el tiempo en aproximadamente $25\mu s$ entre si, cada una produciendo cerca de 23 interacciones con el detector, que junto a otros factores implica cerca de $10^9$ eventos cada segundo \cite{Whiteson2016TheSystem}. La magnitud, tasa de aparición y nivel de energía de estos eventos son las principales razones de la complejidad tecnológica de este detector.
+	Este experimento intercepta grupos de partículas provenientes de haces de protones acelerados en el Gran Colisionador de Hadrones (LHC) en CERN. Estos grupos de partículas producen colisiones espaciadas en el tiempo en aproximadamente $25\mu s$ entre si, cada una produciendo cerca de 23 interacciones con el detector, que junto a otros factores implica cerca de $10^9$ eventos cada segundo \cite{Whiteson2016TheSystem}. La magnitud, tasa de aparición y nivel de energía de estos eventos son las principales razones de la complejidad tecnológica de este detector.
 	
-	\par Este detector posee dos etapas previas de selección de eventos, donde la primera etapa involucra detectores de muones y calorímetros, mientras que la segunda involucra algoritmos distribuidos en varios computadores. La figura \ref{fig:spieler} ilustra la interfaz para la captura de los pulsos generados por muones en los detectores (TGC).
+	Este detector posee dos etapas previas de selección de eventos, donde la primera etapa involucra detectores de muones y calorímetros, mientras que la segunda involucra algoritmos distribuidos en varios computadores. La figura \ref{fig:spieler} ilustra la interfaz para la captura de los pulsos generados por muones en los detectores (TGC).
 	
 	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.6]{spieler.png}
-		\caption{Diagrama de la interfaz de lectura para detectores de muones \cite{Spieler2012ElectronicsAcquisition}. Los muones se representan con el símbolo $\mu$. Existen 3 capas de detectores, por lo tanto se observan 3 bloques que incluyen retardos, selección y captura de los pulsos. La información capturada formará parte de la señal de disparo del primer nivel (Level 1 Trigger).}
+		\caption{Diagrama de la interfaz de lectura para detectores de muones \cite{Spieler2012ElectronicsAcquisition}. Los muones se representan con el símbolo $\mu$. Existen 3 capas de detectores, por lo tanto se observan 3 bloques que incluyen retardos, selección y captura de los pulsos.}
 		\label{fig:spieler}
 	\end{figure}
 	
-	\par Luego de generarse la primera señal de disparo, se da paso a la adquisición de datos en la tarjeta de lectura del detector (Readout System), enviando paralelamente información sobre regiones de interés a analizar, con el fin de llevar a cabo la segunda etapa de selección de eventos mediante el disparo de alto nivel (High-Level Trigger). Esta segunda señal de disparo utiliza software distribuido en cerca de 2000 computadores conectados a una red Ethernet y filtra eventos en función a muestras de datos pertenecientes a las regiones de interés calculadas por la etapa de disparo anterior, como se describe en \cite{Colombo2015Data-flowCase}. Finalmente, los eventos seleccionados son trasferidos y  almacenados en los bancos de datos del centro de investigación. La figura \ref{fig:colombo} ilustra las etapas mencionadas.
+	\newpage
+	Luego de generarse la primera señal de disparo, se da paso a la adquisición de datos en la tarjeta de lectura del detector (\textit{Readout System}), enviando paralelamente información sobre regiones de interés a analizar, con el fin de llevar a cabo la segunda etapa de selección de eventos mediante el disparo de alto nivel (\textit{High-Level Trigger}). Esta segunda señal de disparo utiliza software distribuido en cerca de 2000 computadores conectados a una red Ethernet y filtra eventos en función a muestras de datos pertenecientes a las regiones de interés calculadas por la etapa de disparo anterior, como se describe en \cite{Colombo2015Data-flowCase}. Finalmente, los eventos seleccionados son trasferidos y  almacenados en los bancos de datos del centro de investigación. La figura \ref{fig:colombo} ilustra las etapas mencionadas.
 	
 	\begin{figure}[h]
 		\centering
-		\includegraphics[scale=0.6]{colombo.png}
+		\includegraphics[scale=0.56]{colombo.png}
 		\caption{Diagrama del sistema de disparo y adquisición de datos en el experimento ATLAS. \cite{Colombo2015Data-flowCase}}
 		\label{fig:colombo}
 	\end{figure}
 	
-	\par Entrando en detalle, según se indica en \cite{Whiteson2016TheSystem}, el verdadero sistema de adquisición de datos para este experimento es el software distribuido en red, capaz de discriminar, procesar y transferir los eventos seleccionados a los bancos de datos. El sistema lectura (Readout System) en conjunto con el disparo de primer nivel solo serían un equivalente a una interfaz de captura muy sofisticada, más que las observadas en otros detectores, pero para el caso de este proyecto de titulación es comparable al sistema de adquisición que se desea diseñar.
+	Entrando en detalle, según se indica en \cite{Whiteson2016TheSystem}, el verdadero sistema de adquisición de datos para este experimento es el software distribuido en red, capaz de discriminar, procesar y transferir los eventos seleccionados a los bancos de datos. El sistema lectura (\textit{Readout System}) en conjunto con el disparo de primer nivel solo serían un equivalente a una interfaz de captura muy sofisticada, más que las observadas en otros detectores, pero para el caso de esta memoria de titulación es comparable al sistema de adquisición que se desea diseñar.
 	
-	\par El sistema de lectura consiste en una tarjeta llamada ROBIN, compuesta de buffers, chips de comunicación, memoria flash, procesador y una FPGA, como se ilustra en la figura \ref{fig:whiteson}
+	El sistema de lectura consiste en una tarjeta llamada ROBIN, compuesta de buffers, chips de comunicación, memoria flash, procesador y una FPGA, como se ilustra en la figura \ref{fig:whiteson}
 	
 	\begin{figure}[h]
 		\centering
@@ -72,8 +74,7 @@ En las siguientes páginas se mencionan distintos sistemas relacionados a esta t
 		\label{fig:whiteson}
 	\end{figure}
 	
-	\newpage
-	\par La lógica descrita al interior de dicha FPGA se ilustra en la figura \ref{fig:whiteson2}. Se observa que su labor es principalmente controlar los buffers de datos, traspasar los eventos captados hacia la siguiente etapa y eliminar los datos descartados por la señal de disparo de alto nivel.
+	La lógica descrita al interior de dicha FPGA se ilustra en la figura \ref{fig:whiteson2}. Se observa que su labor es principalmente controlar los buffers de datos, traspasar los eventos captados hacia la siguiente etapa y eliminar los datos descartados por la señal de disparo de alto nivel.
 	
 	\begin{figure}[h]
 		\centering
@@ -82,17 +83,18 @@ En las siguientes páginas se mencionan distintos sistemas relacionados a esta t
 		\label{fig:whiteson2}
 	\end{figure}
 	
-	\par Si bien este detector es comparativamente más complejo que los anteriores, presenta elementos comunes es su composición, sobretodo en la utilización de ASICs y FPGA para captura y control de los datos adquiridos. Se asemeja funcionalmente al PET 4D, en el sentido de implementar múltiples instancias de hardware equivalente, para así lograr manejar mayores cantidades de datos, brindando también mayor control e independencia en cada uno de ellos. El fuerte de este detector radica en su conectividad en red y sistemas distribuidos, necesarios para la gran cantidad de datos simultáneos que deben ser procesados. 
+	\newpage
+	Si bien este detector es comparativamente más complejo que los anteriores, presenta elementos comunes es su composición, sobretodo en la utilización de ASICs y FPGA para captura y control de los datos adquiridos. Se asemeja funcionalmente al PET 4D, en el sentido de implementar múltiples instancias de hardware equivalente, para así lograr manejar mayores cantidades de datos, brindando también mayor control e independencia en cada uno de ellos. El fuerte de este detector radica en su conectividad en red y sistemas distribuidos, necesarios para la gran cantidad de datos simultáneos que deben ser procesados. 
 
-\newpage
-\section{Conclusiones}
-	\par Habiendo comparado y estudiado diferentes estilos de detectores y sistemas de adquisición, es claro que la tendencia es la utilización de ASICs en etapas de primera lectura y de FPGAs en etapas de manejo de datos y preprocesamiento, principalmente debido a la magnitud temporal de las señales, a la alta necesidad de precisión en su sincronización, y a la gran cantidad de señales de entrada que deben ser atendidas.
+%\newpage
+%\section{Síntesis}
+%	Es claro que la tendencia es la utilización de ASICs en etapas de primera lectura y de FPGAs en etapas de manejo de datos y preprocesamiento, principalmente debido a la magnitud temporal de las señales, a la alta necesidad de precisión en su sincronización, y a la gran cantidad de señales de entrada que deben ser atendidas.
+%	
+%	Los elementos más utilizados y recomendados a implementar son los buffers de almacenamiento, principalmente para ajustar la tasa de transmisión de datos de la captura hacia las siguientes etapas de procesamiento, que suelen ser más lentas. En el sistema que se planea diseñar esto no es un problema, ya que la tasa de eventos es muy baja en comparación a los detectores estudiados. Aún así, pueden ser útiles para el escalamiento de los detectores en el futuro.
 	
-	\par Los elementos más utilizados y recomendados a implementar son los buffers de almacenamiento, principalmente para ajustar la tasa de transmisión de datos de la captura hacia las siguientes etapas de procesamiento, que suelen ser más lentas. En el sistema que se planea diseñar esto no sería un problema, ya que la tasa de eventos es muy baja en comparación a los detectores estudiados. Aún así, pueden ser útiles para el escalamiento de los detectores.
-	
-	\par El concepto de serialización de datos estuvo principalmente presente en el detector LabPET II. Es pertinente considerarlo, sobretodo para el escalamiento del detector de muones. En caso de requerir cubrir un área mayor o con varias capas superpuestas de detectores, será necesario captar mayor cantidad de señales. Es allí donde se debe decidir si es recomendable comenzar con serialización de datos o con paralelismo de hardware. Además, dado que es necesario tener noción del tiempo de ocurrencia de los eventos, podría asociarse este dato a cada pulso, facilitando la implementación de serialización de datos. Esto no sería una desventaja, ya que no existe real necesidad de procesar datos de manera rápida y simultanea, reduciendo costos en hardware, pero aumentando esfuerzos de ingeniería.
-	
-	\par Para el caso de preprocesamiento, selección, formateo y transmisión de datos puede se considerar agregar procesadores dedicados en conjunto con la FPGA principal, que si bien no fueron encontrados textualmente en los ejemplos indicados, sí pueden ser de utilidad, sobretodo dada la existencias de chips que incluyen FPGA en conjunto con procesadores, como los SoC (System on Chip) Zynq.
-	
-	\par Finalmente, puede ser interesante incluir métodos de TDC para conversión de la señal digital generada por la placa acondicionadora ASD. La duración de esta señal tiene relación con la amplitud y la energía de los pulsos analógicos captados, lo que podría ser muestreado con una implementación similar a la indicada en \cite{Arpin2010AResources}.
+%	\par El concepto de serialización de datos estuvo principalmente presente en el detector LabPET II. Es pertinente considerarlo, sobretodo para el escalamiento del detector de muones. En caso de requerir cubrir un área mayor o con varias capas superpuestas de detectores, será necesario captar mayor cantidad de señales. Es allí donde se debe decidir si es recomendable comenzar con serialización de datos o con paralelismo de hardware. Además, dado que es necesario tener noción del tiempo de ocurrencia de los eventos, podría asociarse este dato a cada pulso, facilitando la implementación de serialización de datos. Esto no sería una desventaja, ya que no existe real necesidad de procesar datos de manera rápida y simultanea, reduciendo costos en hardware, pero aumentando esfuerzos de ingeniería.
+%	
+%	\par Para el caso de preprocesamiento, selección, formateo y transmisión de datos puede se considerar agregar procesadores dedicados en conjunto con la FPGA principal, que si bien no fueron encontrados textualmente en los ejemplos indicados, sí pueden ser de utilidad, sobretodo dada la existencias de chips que incluyen FPGA en conjunto con procesadores, como los SoC (\textit{System on Chip}) Zynq.
+%	
+%	\par Finalmente, puede ser interesante incluir métodos de TDC para conversión de la señal digital generada por la placa acondicionadora ASD. La duración de esta señal tiene relación con la amplitud y la energía de los pulsos analógicos captados, lo que podría ser muestreado con una implementación similar a la indicada en \cite{Arpin2010AResources}.
 	
