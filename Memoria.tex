@@ -52,6 +52,20 @@
 \spanishdecimal{.}
 \allowdisplaybreaks
 
+
+%%%%% FIXME (set status=final to remove all comments before submitting) %%%%%
+
+\usepackage[footnote, status=draft, nosilent, nomargin]{fixme}
+\fxsetup{theme=color, mode=multiuser} 
+\FXRegisterAuthor{gc}{agc}{\color{red}Gonzalo's comment}
+\FXRegisterAuthor{jg}{ajg}{\color{brown}Jairo's comment}
+
+\usepackage{soul}
+\newcommand{\sgcnote}[1]{\gcnote{\color{gray}{\st{#1}}}}
+\newcommand{\sjgnote}[1]{\jgnote{\color{gray}{\st{#1}}}}
+%%%%%
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -144,112 +158,110 @@ pinstyle/.style = {pin edge={to-,thin,black}}
 %\thispagestyle{empty}
 %\cleardoublepage
 
-\chapter{Estado del arte}
-\label{cap:art}
-\input{tex/EstadoArte.tex}
+%\chapter{Estado del arte}
+%\label{cap:art}
+%\input{tex/EstadoArte.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
 
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
+%\chapter{Arquitectura propuesta}
+%\label{cap:arq}
+%\input{tex/ArquitecturaPropuesta.tex}
 
-\chapter{Arquitectura propuesta}
-\label{cap:arq}
-\input{tex/ArquitecturaPropuesta.tex}
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
 
+%\chapter{Detección}
+%\label{cap:stgc}
+%\input{tex/Deteccion.tex}
 
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
 
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
+%\chapter{Lectura}
+%\label{cap:asd}
+%\input{tex/Lectura.tex}
 
-\chapter{Detección}
-\label{cap:stgc}
-\input{tex/Deteccion.tex}
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
 
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
+%\chapter{Muestreo}
+%\label{cap:sampling}
+%\input{tex/Muestreo.tex}
 
-\chapter{Lectura}
-\label{cap:asd}
-\input{tex/Lectura.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Muestreo}
-\label{cap:sampling}
-\input{tex/Muestreo.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Discriminación}
-\label{cap:discriminator}
-\input{tex/Discriminacion.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Estructuración}
-\label{cap:structure}
-\input{tex/Estructuracion.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-
-\chapter{Análisis}
-\label{cap:analysis}
-\input{tex/Analisis.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Sincronización}
-\label{cap:sync}
-\input{tex/Sincronizacion.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Comunicación}
-\label{cap:comm}
-\input{tex/Comunicacion.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Pruebas}
-\label{cap:test}
-\input{tex/Comunicacion.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Resultados}
-\label{cap:insights}
-\input{tex/Resultados.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter{Conclusiones}
-\label{cap:conclusiones}
-\input{tex/Conclusiones.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Discriminación}
+%\label{cap:discriminator}
+%\input{tex/Discriminacion.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Estructuración}
+%\label{cap:structure}
+%\input{tex/Estructuracion.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%
+%\chapter{Análisis}
+%\label{cap:analysis}
+%\input{tex/Analisis.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Sincronización}
+%\label{cap:sync}
+%\input{tex/Sincronizacion.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Comunicación}
+%\label{cap:comm}
+%\input{tex/Comunicacion.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Pruebas}
+%\label{cap:test}
+%\input{tex/Comunicacion.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Resultados}
+%\label{cap:insights}
+%\input{tex/Resultados.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Conclusiones}
+%\label{cap:conclusiones}
+%\input{tex/Conclusiones.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
 
 
 %%%------------------APÉNDICES--------------------------------
