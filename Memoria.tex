@@ -98,26 +98,26 @@ pinstyle/.style = {pin edge={to-,thin,black}}
 \newpage
 
 
-\chapter*{Agradecimientos}
-\input{tex/Agradecimientos.tex}
-\afterpage{\thispagestyle{empty}\null\newpage}
-
+%\chapter*{Agradecimientos}
+%\input{tex/Agradecimientos.tex}
+%\afterpage{\thispagestyle{empty}\null\newpage}
+%
 
 %%--------------------RESUMEN----------------------
 
-\chapter*{Resumen}
-\input{tex/Resumen.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
-
-\chapter*{Abstract}
-\input{tex/Abstract.tex}
-
-\newpage
-\thispagestyle{empty}
-\cleardoublepage
+%\chapter*{Resumen}
+%\input{tex/Resumen.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter*{Abstract}
+%\input{tex/Abstract.tex}
+%
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
 
 %%--------------------ÍNDICE---------------------------------
 \tableofcontents
@@ -158,42 +158,44 @@ pinstyle/.style = {pin edge={to-,thin,black}}
 %\thispagestyle{empty}
 %\cleardoublepage
 
-%\chapter{Estado del arte}
-%\label{cap:art}
-%\input{tex/EstadoArte.tex}
+\chapter{Estado del arte}
+\label{cap:art}
+\input{tex/EstadoArte.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Arquitectura propuesta}
+\label{cap:arq}
+\input{tex/ArquitecturaPropuesta.tex}
+
+
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Detección}
+\label{cap:stgc}
+\input{tex/Deteccion.tex}
+
+%\newpage
+%\thispagestyle{empty}
+%\cleardoublepage
+%
+%\chapter{Lectura}
+%\label{cap:asd}
+%\input{tex/Lectura.tex}
 %
 %\newpage
 %\thispagestyle{empty}
 %\cleardoublepage
-
-%\chapter{Arquitectura propuesta}
-%\label{cap:arq}
-%\input{tex/ArquitecturaPropuesta.tex}
-
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-
-%\chapter{Detección}
-%\label{cap:stgc}
-%\input{tex/Deteccion.tex}
-
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-
-%\chapter{Lectura}
-%\label{cap:asd}
-%\input{tex/Lectura.tex}
-
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-
+%
 %\chapter{Muestreo}
 %\label{cap:sampling}
 %\input{tex/Muestreo.tex}
-
+%
 %\newpage
 %\thispagestyle{empty}
 %\cleardoublepage
@@ -266,22 +268,22 @@ pinstyle/.style = {pin edge={to-,thin,black}}
 
 %%%------------------APÉNDICES--------------------------------
 
-\appendix
-\chapter{Control de versiones de proyectos Vivado con Git}
-\label{git}
-\input{tex/Appx_git.tex}
-
-\chapter{Conexión de señales LVDS en una FPGA Artix 7}
-\label{lvds}
-\input{tex/Appx_lvds.tex}
-
-\chapter{Ajuste de forma en pulsos electrónicos para la física}
-\label{shaping}
-\input{tex/Appx_shaping.tex}
-
-\chapter{Rayos cósmicos y partículas de alta energía}
-\label{muon}
-\input{tex/Appx_muon.tex}
+%\appendix
+%\chapter{Control de versiones de proyectos Vivado con Git}
+%\label{git}
+%\input{tex/Appx_git.tex}
+%
+%\chapter{Conexión de señales LVDS en una FPGA Artix 7}
+%\label{lvds}
+%\input{tex/Appx_lvds.tex}
+%
+%\chapter{Ajuste de forma en pulsos electrónicos para la física}
+%\label{shaping}
+%\input{tex/Appx_shaping.tex}
+%
+%\chapter{Rayos cósmicos y partículas de alta energía}
+%\label{muon}
+%\input{tex/Appx_muon.tex}
 
 %%%------------------BIBLIOGRAFÍA-----------------------------
 
