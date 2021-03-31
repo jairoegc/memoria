@@ -167,117 +167,69 @@ pinstyle/.style = {pin edge={to-,thin,black}}
 \thispagestyle{empty}
 \cleardoublepage
 
-\chapter{Arquitectura propuesta}
-\label{cap:arq}
-\input{tex/ArquitecturaPropuesta.tex}
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
 
+\chapter{Sistema de Detección}
+\label{cap:sdet}
 
+\section{Detector de Partículas}
+\label{sec:stgc}
+\input{tex/Deteccion.tex}
+
+\section{Interfaz de Lectura}
+\label{sec:asd}
+\input{tex/Lectura.tex}
 
 \newpage
 \thispagestyle{empty}
 \cleardoublepage
 
-\chapter{Detección}
-\label{cap:stgc}
-\input{tex/Deteccion.tex}
+\chapter{Sistema de Adquisición}
+\label{cap:sadq}
+\input{tex/ArquitecturaPropuesta.tex}
 
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Lectura}
-%\label{cap:asd}
-%\input{tex/Lectura.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Muestreo}
-%\label{cap:sampling}
-%\input{tex/Muestreo.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Discriminación}
-%\label{cap:discriminator}
-%\input{tex/Discriminacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Estructuración}
-%\label{cap:structure}
-%\input{tex/Estructuracion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%
-%\chapter{Análisis}
-%\label{cap:analysis}
-%\input{tex/Analisis.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Sincronización}
-%\label{cap:sync}
-%\input{tex/Sincronizacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Comunicación}
-%\label{cap:comm}
-%\input{tex/Comunicacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Pruebas}
-%\label{cap:test}
-%\input{tex/Comunicacion.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Resultados}
-%\label{cap:insights}
-%\input{tex/Resultados.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
-%
-%\chapter{Conclusiones}
-%\label{cap:conclusiones}
-%\input{tex/Conclusiones.tex}
-%
-%\newpage
-%\thispagestyle{empty}
-%\cleardoublepage
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Simulaciones}
+\label{cap:sim}
+\input{tex/Simulaciones.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Pruebas}
+\label{cap:test}
+\input{tex/Pruebas.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
+
+\chapter{Conclusiones}
+\label{cap:conclusiones}
+\input{tex/Conclusiones.tex}
+
+\newpage
+\thispagestyle{empty}
+\cleardoublepage
 
 
 %%%------------------APÉNDICES--------------------------------
 
-%\appendix
-%\chapter{Control de versiones de proyectos Vivado con Git}
-%\label{git}
-%\input{tex/Appx_git.tex}
-%
-%\chapter{Conexión de señales LVDS en una FPGA Artix 7}
-%\label{lvds}
-%\input{tex/Appx_lvds.tex}
-%
+\appendix
+\chapter{Control de versiones de proyectos Vivado con Git}
+\label{cap:git}
+\input{tex/Appx_git.tex}
+
+\chapter{Conexión de señales LVDS en una FPGA Artix 7}
+\label{cap:lvds}
+\input{tex/Appx_lvds.tex}
+
 %\chapter{Ajuste de forma en pulsos electrónicos para la física}
 %\label{shaping}
 %\input{tex/Appx_shaping.tex}

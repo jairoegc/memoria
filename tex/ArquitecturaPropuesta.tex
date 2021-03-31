@@ -1,3 +1,8 @@
+Descripción de la etapa de adquisición, sus partes, su relación con la etapa anterior, contenidos del capitulo.
+
+\section{Arquitectura propuesta}
+\label{sec:arq}
+
 En el capítulo anterior, se compararon tres sistemas diferentes para la implementación de adquisición de datos para física de partículas. En ellos destacan aspectos comunes de implementación: etapas de detección de eventos, memorias para almacenamiento temporal, procesamiento de los datos y la utilización de FPGA como herramienta principal para la implementación del hardware.
 
 ¿Cuáles son las etapas esenciales que un DAQ debe poseer? En esencia se requiere de una primera etapa de interfaz de lectura directamente de los detectores (\textit{Readout}), las cuales suelen poseer amplificadores, modeladores de pulsos, memorias y digitalizadores. Una segunda etapa suele consistir en el preprocesamiento de las señales, extrayendo la información básica y formando estructuras de datos pertinentes. Finalmente, está la etapa de procesamiento fuera del detector, donde se realiza el análisis e interpretación de los datos.
@@ -6,7 +11,7 @@ En este proyecto de titulación, la primera etapa la lleva a cabo la tarjeta aco
 
 
 
-\section{Esquema General}
+\subsection{Esquema General}
 	Como se indica en la figura \ref{img:diagrama}, se requieren al menos tres etapas esenciales: discriminar, procesar y analizar. Discriminar se refiere a distinguir entre aquellos eventos que corresponden un muón de aquellos que no, descartando estos últimos. Procesar implica utilizar los pulsos escogidos, formar una estructura que los relacione como un solo evento y posiblemente incluir información de ellos, como una marca temporal y la duración de los pulsos captados en dicho evento. 
 	
 	\begin{figure}[h]
@@ -19,7 +24,7 @@ En este proyecto de titulación, la primera etapa la lleva a cabo la tarjeta aco
 	La etapa de análisis implica mayor complejidad y puede extenderse para abarcar distintos niveles. El análisis más básico implica leer un evento e inferir la región del detector que fue excitada por el paso del muon. Niveles siguientes implicarían estimar la energía del muon, incluir mayor precisión espacial, correlacionar con eventos anteriores o incluso trazar la trayectoria  del paso de la partícula al superponer los datos de eventos originados en otros detectores.
 
 \newpage
-\section{Requisitos}
+\subsection{Requisitos}
 	
 	\begin{itemize}
 		\item Se debe contar con al menos 32 pares de entradas bajo el estándar LVDS, con el fin de conectar al menos 2 tarjetas ASD (Amplificator Shaper Discriminator) utilizadas cada una como la interfaz de detectores de 16 canales.
@@ -34,7 +39,7 @@ En este proyecto de titulación, la primera etapa la lleva a cabo la tarjeta aco
 	Respecto a la tasa de aparición de pulsos consecutivos, es poco probable que ocurran eventos simultáneos o cercanos. Se espera que la tasa de muones por centímetro cuadrado sea de un muón por minuto, lo que en los $15[cm^2]$ representados por una señal de detector implicaría cerca de 15 muones por minuto o $2,5*10^{10}$ muones cada 100 [ns], lo que se traduce a una muy baja probabilidad de eventos simultáneos o incluso cercanos. De hecho, la tasa de detección de muones puede disminuir estando bajo tierra y se planea que la toma de una muongrafía conlleve un tiempo prolongado de exposición a rayos cósmicos. Esto conduce a la conclusión de que ignorar posibles eventos simultáneos o adyacentes no tendrá implicancias significativas en los resultados de la muongrafía final.
 
 \newpage
-\section{Propuesta}
+\subsection{Propuesta}
 	La alternativa más utilizada en el rubro es la FPGA. Esta ha sido la herramienta que se ha visto con mayor frecuencia en proyectos relativos a física de partículas y adquisición de datos. 
 	Las FPGA cuentan con una cantidad significativa de recursos y periféricos. Incluyen además hardware dedicado para comunicación, serialización y almacenamiento de datos. Incluso suelen incluir CPLDs en las placas que las albergan. Una desventaja conocida corresponde a que se basan en memorias volátiles, por lo que el hardware descrito se debe reconfigurar cada vez que se enciende, y los datos importantes deben ser almacenados en memorias externas.
 	
@@ -148,3 +153,32 @@ La idea en esta alternativa de solución es guardar los pulsos provenientes de l
 \end{figure}
 
 Se espera que para lograr el escalamiento se incluya una señal para mantener la lectura de eventos sincronizada entre distintas FPGA. Además, se deberá incluir un modulo de comunicación para entregar la información captada a una etapa posterior con un análisis más detallado, encargado de reunir todos los eventos de diferentes FPGAs.
+
+\section{Muestreo de Señales Digitales}
+\label{sec:sampling}
+Detalles de la etapa de muestreo de pulsos LVDS digitales provenientes de la interfaz de lectura. Diagramas del diseño de hardware, máquinas de estado, descripción del funcionamiento, entradas y salidas, recursos utilizados.
+
+Primera etapa de diseño de hardware. Se reciben 16 canales digitales en formato LVDS, correspondientes a las señales de salida de la interfaz de lectura ASD. Estos pulsos se muestrean a una frecuencia de XHz y se almacenan en una memoria FIFO 
+
+Para la implementación de este módulo, se 
+
+\section{Discriminación de Eventos}
+\label{sec:discriminator}
+Diseño de etapa de discriminación, para distinguir pulsos reales de falsos positivos mediante señal de trigger externo. Diagramas, maquinas de estado y recursos asociados.
+
+\section{Estructuración de Datos}
+\label{sec:structure}
+Diseño de la etapa de estructuración, para la organización de la información capturada en estructuras de datos coherentes. La información se asocia a canales y eventos. Diagramas, máquinas de estados, recursos.
+
+\section{Análisis de Datos}
+\label{sec:analysis}
+Diseño de la etapa de análisis, para asociar cuadrantes y carga eléctrica a cada evento según los datos capturados. Diagramas, máquinas de estado, variables, recursos, descripción.
+
+
+%\section{Sincronización}
+%\label{sec:sync}
+
+
+\section{Comunicación}
+\label{sec:comm}
+Diseño de etapa de comunicación serial, protocolo, caracteristicas, máquina de estado, diagramas, variables, recursos, descripciones.
