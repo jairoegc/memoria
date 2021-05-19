@@ -154,31 +154,125 @@ La idea en esta alternativa de solución es guardar los pulsos provenientes de l
 
 Se espera que para lograr el escalamiento se incluya una señal para mantener la lectura de eventos sincronizada entre distintas FPGA. Además, se deberá incluir un modulo de comunicación para entregar la información captada a una etapa posterior con un análisis más detallado, encargado de reunir todos los eventos de diferentes FPGAs.
 
-\section{Muestreo de Señales Digitales}
+\section{Muestreo de Señales y Discriminación de Eventos}
 \label{sec:sampling}
-Detalles de la etapa de muestreo de pulsos LVDS digitales provenientes de la interfaz de lectura. Diagramas del diseño de hardware, máquinas de estado, descripción del funcionamiento, entradas y salidas, recursos utilizados.
 
-Primera etapa de diseño de hardware. Se reciben 16 canales digitales en formato LVDS, correspondientes a las señales de salida de la interfaz de lectura ASD. Estos pulsos se muestrean a una frecuencia de XHz y se almacenan en una memoria FIFO 
+La etapa de muestreo y discriminación es la encargada de recibir las señales digitales generadas por la interfaz ASD. Esta etapa muestrea la señal entrante a una frecuencia de 500MHz y asocia las muestras entrantes a las señales de disparo correspondientes.
 
-Para la implementación de este módulo, se 
+Para capturar las señales en formato LVDS, se utilizan puertos IBUFDS. Estos puertos deben configurarse para recibir señales LVDS de 2.5V y activar la resistencia interna de terminación para el estándar diferencial. Luego de ser capturadas, las señales se sincronizan con el reloj del circuito, haciéndolas pasar por dos flipflops.
 
-\section{Discriminación de Eventos}
-\label{sec:discriminator}
-Diseño de etapa de discriminación, para distinguir pulsos reales de falsos positivos mediante señal de trigger externo. Diagramas, maquinas de estado y recursos asociados.
+Para el muestreo de señales, se utiliza un shift-register de 64 bits, el cual representa la ventana de adquisición del pulso digital capturado. Los 64 bits de este shift-register serán entregados a la siguiente etapa en el instante en que se reciba la señal de disparo. 
 
-\section{Estructuración de Datos}
-\label{sec:structure}
-Diseño de la etapa de estructuración, para la organización de la información capturada en estructuras de datos coherentes. La información se asocia a canales y eventos. Diagramas, máquinas de estados, recursos.
+El shift-register funciona como buffer y retardo para la señal digital muestreada. Dada la frecuencia de muestreo, cada bit representa 2ns de la señal muestreada. Considerando que la señal de disparo posee un retardo de 100ns, a la llegada del disparo la señal queda ubicada ente el bit 10 y 63 aproximadamente. Esta configuración permite una ventana de 20ns antes de la señal de trigger y aproximadamente 30ns de ventana posterior a la señal muestreada en el caso de más larga duración posible (70ns).
 
-\section{Análisis de Datos}
-\label{sec:analysis}
-Diseño de la etapa de análisis, para asociar cuadrantes y carga eléctrica a cada evento según los datos capturados. Diagramas, máquinas de estado, variables, recursos, descripción.
+Al detectar la señal de disparo, esta etapa registra los datos de todos los canales en un arreglo bidimencional y mantiene su estado hasta recibir la señal de que han sido guardados correctamente por la etapa siguiente. Mientras esto no suceda, el shift-register seguirá muestreando datos, pero se ignorarán las señales de disparo.
+
+%Detalles de la etapa de muestreo de pulsos LVDS digitales provenientes de la interfaz de lectura.Diseño de etapa de discriminación, para distinguir pulsos reales de falsos positivos mediante señal de trigger externo. Diagramas del diseño de hardware, máquinas de estado, descripción del funcionamiento, entradas y salidas.
 
 
-%\section{Sincronización}
-%\label{sec:sync}
 
+\subsection{Objetivos}
+\begin{itemize}
+	\item Muestrear a máxima frecuencia los pulsos digitales.
+	\item Mantener en memoria los pulsos muestreados mientras llega la señal de disparo.
+	\item Pasar una grupo de datos a la etapa siguiente al momento de detectar la señal de disparo.
+\end{itemize}
+
+\subsection{Diagrama de Bloques}
+%Diagrama que incluye módulos, conexiones, entradas y salidas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{image.pdf}
+	\caption{caption}
+	\label{fig:}
+\end{figure}
+
+\subsection{Decisiones de Diseño}
+%Por qué se utiliza un shift-register, a qué se debe el tamaño del buffer, por qué se muestrea a esa frecuencia.
+
+Se utiliza un shift-register debido a su simplicidad y capacidad de operar a altas frecuencias de reloj. Permite el almacenamiento natural por orden de llegada de cada bit digital de la la señal y es posible entregar la totalidad de los datos contenidos en este shif-register a la etapa siguiente.
+
+Considerando 16 canales, con un buffer de 64 bits cada uno, el shift-register consiste en un arreglo bidimensional de 16 filas con 64 bits de ancho cada una.
+
+La frecuencia de muestreo de 500MHz se escogió por ser la frecuencia más alta sintetizable en el diseño, y por permitir una resolución de tiempo suficiente para distinguir el ancho de los pulsos digitales.
+
+
+\section{Buffer de Eventos}
+\label{sec:buffer}
+%Diseño de la etapa de estructuración, para la organización de la información capturada en estructuras de datos coherentes. La información se asocia a canales y eventos. Diagramas, máquinas de estados, recursos.
+
+El buffer de eventos consiste en almacenar provisoriamente los eventos entrantes, hasta que la etapa siguiente solicite la entrega de los eventos capturados. Los eventos son almacenados en una memoria FIFO.
+
+Esta etapa funciona a 125MHz, dado que la memoria FIFO no es capaz de funcionar a altas frecuencias de reloj.
+
+Una vez que es detectada la señal de disparo, se procede a leer los datos de la etapa anterior. Estos se realiza entregando la última fila de la estructura de datos a la entrada de la memoria FIFO. Una vez que es almacenada en memoria, se desplazan los datos de la estructura y se repite el ciclo. Así, en la memoria FIFO cada dato corresponde a un canal consecutivo de 64 bits, donde 16 datos consecutivos corresponden a un mismo evento.
+
+Los eventos son entregados a la etapa siguiente a la llegada del comando correspondiente, entregando la información de cada canal en 2 paquetes de 32bits cada uno. Este formato de entrega facilita la comunicación entre la lógica programable y el procesador.
+
+\subsection{Objetivos}
+\begin{itemize}
+	\item Almacenar eventos entrantes
+	\item Entregar eventos solicitados a la etapa de comunicación
+\end{itemize}
+
+\subsection{Diagrama de Bloques}
+%Diagrama que incluye módulos, conexiones, entradas y salidas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{image.pdf}
+	\caption{caption}
+	\label{fig:}
+\end{figure}
+
+\subsection{Decisiones de Diseño}
+%Cual formato y estructura se elige, por qué, cómo se organiza la información
+
+Se escogió una memoria FIFO por adecuarse bien a la naturaleza de los datos. El orden de los eventos es importante y son leidos por orden de llegada. Esta lógica es bien representada por una memoria FIFO. Además, esta memoria permite el almacenamiento de suficientes eventos y sus respectivos canales. %Otras opciones?
+
+Al guardar un evento, se almacenan sus 16 canales en la memoria FIFO. Estos 16 canales serán consecutivos a los 16 canales del evento anterior. La correcta lectura de datos en grupos de 16 es realizada mediante las máquinas de estados. Se decidió operar de esta manera para simplificar la implementación del hardware y debido a que no es posible almacenar un arreglo bidimensional en una sola dirección de memoria de una FIFO.
+
+Al momento de leer los datos almacenados en la memoria, se toma cada elemento de 64bits y se divide en 2 partes de 32 bits. Esto facilita la entrega de datos desde la lógica programable hacia el procesador. Esta entrega se hace mediante el GPIO del procesador, con un puerto de 32bits. El GPIO cuenta con puertos limitados, es por eso que no se utiliza simplemente un puerto de 64Bits. Los datos se entregan desde la PL al PS, debido a que el módulo de comunicación UART se encuentra en el procesador.
+
+%por que una fifo
+%por que se envían 16 consecutivos
+%por qué se envía cada canal en dos partes
 
 \section{Comunicación}
 \label{sec:comm}
-Diseño de etapa de comunicación serial, protocolo, caracteristicas, máquina de estado, diagramas, variables, recursos, descripciones.
+%Diseño de etapa de comunicación serial, protocolo, características, máquina de estado, diagramas, variables, recursos, descripciones.
+
+La etapa de comunicación se encarga de entregar los eventos y sus respectivos canales hacia el mundo exterior.
+
+La comunicación se lleva a cabo mediante la UART en el procesador de la sync, a 115200 baudios. Recibe comandos en formato ASCII y entrega los datos en numeros enteros sin signo de 32bits. Se envía un evento completo con sus canales consecutivos.
+
+Para comunicar la lógica programable con el procesador se utiliza la GPIO del procesador, destinando 32 bits para datos de entrada y 8 bits para datos de salida. Los datos de entrada serán los bits del evento, mientras que los datos de salida corresponden a los comandos de operación para solicitar el envío de la información.
+
+Dado que los datos de cada canal tienen 64bits de largo, estos son seccionados en dos partes de 32bits. Esto permite enviar la informacióna través del GPIO, tomando dos ciclos de reloj por cada canal a enviar.
+
+\subsection{Objetivos}
+\begin{itemize}
+	\item Entregar la información capturada a otro dispositivo mediante comunicación serial 
+\end{itemize}
+
+\subsection{Diagrama de Bloques}
+%Diagrama que incluye módulos, conexiones, entradas y salidas.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.75]{image.pdf}
+	\caption{caption}
+	\label{fig:}
+\end{figure}
+
+
+\subsection{Decisiones de Diseño}
+%Por qué se prefiere este medio de comunicación, su frecuencia, formato.
+
+El baudrate escogido es de 115200 baudios, ya que es el más alto configurable. Esto permite agilizar la comunicación,
+
+Los comandos consisten en letras en formato ASCII. Una letra se compone de 8 bits, lo que justifica la elección del puerto de comunicaión de comandos en el GPIO.
+
+El formato en el que se envian los datos corresponde a números enteros de 32bits sin signo, tipo de dato que facilita la interpretación de los bits contenidos en el dato. Esta información será analizada posteriormente por el computador que reciba los datos.
+
