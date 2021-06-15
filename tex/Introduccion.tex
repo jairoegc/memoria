@@ -8,8 +8,6 @@ El presente capítulo relata el contexto, las principales motivaciones que origi
 
 El planeta tierra es constantemente bombardeado por rayos cósmicos provenientes del espacio exterior, correspondiendo principalmente a partículas cargadas como protones y núcleos atómicos. El origen de estos rayos cósmicos es variado, y aunque la fuente de algunos es desconocida, la mayor parte de ellos provienen de tormentas solares, agujeros negros e incluso de eventos astronómicos asociados al origen del universo\cite{Tanabashi2018ReviewPhysics}. La velocidad alcanzada por estas partículas cósmicas es tan grande que entran en la categoría de partículas de altas energías, alcanzando desde unos cuantos GeV (Giga Electron Volts) en partículas provenientes del sol, hasta más de 1000 TeV (Tera Electron Volts) para rayos originados en centros galácticos y agujeros negros \cite{DeUndergraduatePhysics}.
 	
-	%El estudio de los rayos cósmicos permite conocer detalles sobre eventos astronómicos lejanos, pero también da la oportunidad de dilucidar características propias de la materia atravesada por estas partículas.
-	
 	Los rayos cósmicos inciden en el planeta tierra e interactúan con la atmósfera terrestre, produciendo partículas secundarias y la ionización del medio. Estas partículas secundarias decaen en nuevas partículas o vuelven a interactuar con otras a su paso, generando una efecto en cadena y produciendo así una lluvia de partículas subatómicas sobre la corteza terrestre, entre las cuales se encuentran los muones. La Figura \ref{img:cosmic-ray} corresponde a una representación artística que ayuda a ilustrar una lluvia de partículas originada por radiación cósmica.
 	
 	Los muones corresponden al 70\% de las partículas que logran llegar a la superficie del planeta. Un muon posee una carga eléctrica equivalente a la de un electrón, pero su masa equivale a casi 200 electrones. Los muones viajan a velocidades cercanas a la de la luz, lo que sumado a su gran masa, les permite atravesar la materia casi sin interactuar con ella. Durante sus cerca de $2\mu$s de vida media \cite{Tanabashi2018ReviewPhysics} (desde su origen hasta su decaimiento), los muones son incluso capaces de llegar a zonas bajo tierra.
@@ -29,10 +27,10 @@ El planeta tierra es constantemente bombardeado por rayos cósmicos provenientes
 \section{Motivación}
 	El ``Sistema de adquisición de datos para detectores de muones'' nace como un requerimiento del CCTVal para aplicaciones de física de partículas en el marco del proyecto ``sTGC Minería'', cuyo nombre se debe al tipo de detector utilizado, llamado "small-strip Thin Gap Chamber".
 	
-	Uno de los objetivos principales de ``sTGC Minería'' es realizar tomografías muónicas de terreno minero detectando partículas que provengan de radiación cósmica, método similar al que se utiliza para encontrar criptas y cavernas en pirámides egipcias \cite{AlvarezSearchPyramids}. Estas tomografías sientan las bases para la detección de cavernas subterráneas y estimación de densidad en terrenos mineros. %La figura \ref{img:muongrafia} corresponde a una muongrafía de un corte trasversal de terreno. \gcnote{explicar un poco mejor la figura. Que informacion util entrega esa figura? Que significa el mapa de colores?}
+	Uno de los objetivos principales de ``sTGC Minería'' es realizar tomografías muónicas de terreno minero detectando partículas que provengan de radiación cósmica, método similar al que se utiliza para encontrar criptas y cavernas en pirámides egipcias \cite{AlvarezSearchPyramids}. Estas tomografías sientan las bases para la detección de cavernas subterráneas y estimación de densidad en terrenos mineros.
 
 	
-	Producto de la colaboración existente entre CCTVal y el experimento ATLAS (A Toroidal LHC ApparatuS) en CERN (Conseil Européen pour la Recherche Nucléaire), CCTVal cuenta con las herramientas y conocimientos necesarios para la fabricación de detectores de muones. Esta colaboración internacional consiste en la actualización de un sector del experimento ATLAS, llamado Small Wheel, cuyos detectores son fabricados solamente en Chile y otros cuatro países. La Figura \ref{img:diagrama-atlas} ilustra el diagrama del experimento, indicandose la Small Wheel en el sector central del instrumento. La Figura \ref{img:small-wheel} corresponde a un fotografía  del proceso de montaje de la Small Wheel. Los trapecios dorados (marcado en rojo) que se observan en dicha imagen corresponden a los detectores sTGC, donde los tercios superiores (marcado en azul) de cada trapecio son los detectores fabricados en CCTVal. La Figura \ref{img:stgc-silab} ilustra una fotografía de los detectores sTGC en su etapa de fabricación. La tecnología utilizada para confeccionar estos detectores es la misma a utilizar en ``sTGC Minería''.
+	Producto de la colaboración existente entre CCTVal y el experimento ATLAS (A Toroidal LHC ApparatuS) en CERN (Conseil Européen pour la Recherche Nucléaire), CCTVal cuenta con las herramientas y conocimientos necesarios para la fabricación de detectores de muones. Esta colaboración internacional consiste en la actualización de un sector del experimento ATLAS, llamado Small Wheel, cuyos detectores son fabricados solamente en Chile y otros cuatro países. La Figura \ref{img:diagrama-atlas} ilustra el diagrama del experimento, indicandose la Small Wheel en el sector central del instrumento. La Figura \ref{img:small-wheel} corresponde a un fotografía  del proceso de montaje de la Small Wheel. Los trapecios dorados (marcado en rojo) que se observan en dicha imagen corresponden a los detectores sTGC, donde los tercios superiores (marcado en azul) de cada trapecio son los detectores fabricados en CCTVal. La Figura \ref{img:stgc-silab} ilustra una fotografía de los detectores sTGC en su etapa de fabricación. La tecnología utilizada para confeccionar estos detectores es la misma a utilizar en ``sTGC Minería'', aplicándose a detectores prototipo de tan solo 15cm$^2$ de superficie.
 	
 	Actualmente, CCTVal cuenta con el conocimiento para fabricación de detectores, pero no cuenta con toda la experiencia respecto al manejo de datos provenientes de ellos. El diseño de un sistema de adquisición representa uno de los primeros pasos para adquirir experiencia práctica. Esta experiencia será valiosa para este y futuros proyectos relacionados con detección de partículas.
 	
@@ -57,15 +55,6 @@ El planeta tierra es constantemente bombardeado por rayos cósmicos provenientes
 		\caption{Fotografía de la fabricación de detectores sTGC en laboratorios de CCTVal. Cada una de placas observadas en la imagen corresponde a capas constitutivas de un detector.}
 		\label{img:stgc-silab}
 	\end{figure}
-	
-	
-%	\begin{figure}[h]
-%		\centering
-%		\includegraphics[scale=1]{Stgcgif.jpg}
-%		\caption{Imagen referencial de un mapa de calor para representación de densidades en un corte transversal de terreno.}
-%		\label{img:muongrafia}
-%	\end{figure}
-%	
 
 \section{Planteamiento del Problema}
 \label{sec:planteamiento}
