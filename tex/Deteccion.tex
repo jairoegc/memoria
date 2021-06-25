@@ -1,20 +1,22 @@
 
-La detección de muones en este proyecto es realizada mediante un detector de partículas inspirado en los detectores sTGC del experimento ATLAS, en CERN. La sigla significa ''small Thin Gap Chamber", y forman parte de un espectrómetro de muones para conocer momento y trayectoria de estas partículas. Esta información permite la reconstrucción de eventos asociados a colisiones de partículas. La figura \ref{img:atlas-layout} ilustra la ubicación de los detecotres de muones dentro del espectrómetro de ATLAS, en el costado superior derecho. La figura \ref{img:atlas-tgc} corresponde a una fotografía de los detectores TGC involucrados en este espectrómetro.
+La detección de muones en este proyecto es realizada mediante un detector de partículas inspirado en los detectores sTGC del experimento ATLAS, como se mencionó en la sección \ref{par:smallwheel}. Los detectores originales se ubican en la llamada Small Wheel de ATLAS, formando parte del Espectrómetro de Muones, el cual se encarga de determinar el momento y la trayectoria de los muones emitidos por las colisiones. Para el proyecto sTGC minería se construyó un prototipo de detector sTGC a menor escala, pero con la misma tecnología de fabricación utilizada para los detectores originales. En esta sección se describe la estructura de un sTGC original y la del prototipo en cuestión, incluyendo información sobre el funcionamiento y operación del prototipo de detector sTGC fabricado en CCTVal.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.3]{atlas-muon-spectrometer-layout.png}
-	\caption{Diagrama del espectrómetro de muones en el experimento ATLAS\cite{DiehlE2009ATLASCommissioning}.}
-	\label{img:atlas-layout}
-\end{figure}
+%La sigla significa de los ''small Thin Gap Chamber", y forman parte de un espectrómetro de muones para conocer momento y trayectoria de estas partículas. Esta información permite la reconstrucción de eventos asociados a colisiones de partículas. La figura \ref{img:atlas-layout} ilustra la ubicación de los detecotres de muones dentro del espectrómetro de ATLAS, en el costado superior derecho. La figura \ref{img:atlas-tgc} corresponde a una fotografía de los detectores TGC involucrados en este espectrómetro.
 
-\newpage
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=0.3]{atlas-muon-tgc.jpg}
-	\caption{Fotografía del los detectores sTGC en el espectrómetro de muones del experimento ATLAS\cite{ATLASExperiment2020MuonSpectometer}. El diámetro de este dispositivo es cercano a 24 metros.}
-	\label{img:atlas-tgc}
-\end{figure}
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[scale=0.3]{atlas-muon-spectrometer-layout.png}
+%	\caption{Diagrama del espectrómetro de muones en el experimento ATLAS\cite{DiehlE2009ATLASCommissioning}.}
+%	\label{img:atlas-layout}
+%\end{figure}
+%
+%\newpage
+%\begin{figure}[h]
+%	\centering
+%	\includegraphics[scale=0.3]{atlas-muon-tgc.jpg}
+%	\caption{Fotografía del los detectores sTGC en el espectrómetro de muones del experimento ATLAS\cite{ATLASExperiment2020MuonSpectometer}. El diámetro de este dispositivo es cercano a 24 metros.}
+%	\label{img:atlas-tgc}
+%\end{figure}
 
 \begin{figure}[h]
 	\centering
@@ -23,18 +25,15 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 	\label{img:stgc-structure}
 \end{figure}
 
-\newpage
-\section{Estructura}
+\section{Estructura general}
 
-	Un TGC está compuesto por dos planos de grafito (cátodos), con múltiples cables en medio (ánodos), como se observa en la figura \ref{img:stgc-structure}. Recubriendo el exterior de ambos cátodos se ubican capas aislantes que los separan de zonas conductoras. Estas son llamadas ``\textit{pads}'' en la cara superior y ``\textit{strips}'' en la cara inferior del detector. Los cables se encuentran orientados perpendicularmente respecto a los \textit{strips}.
+	Un sTGC está compuesto por dos planos de grafito (cátodos), con múltiples cables en medio (ánodos)\cite{Formenti2018CERNReport}, tal como se observa en la figura \ref{img:stgc-structure}. Recubriendo el exterior de ambos cátodos se ubican capas aislantes que separan los cátodos de las zonas conductoras, llamadas ``\textit{pads}'' en la cara superior y ``\textit{strips}'' en la cara inferior del detector. Los cables al interior del detector se encuentran orientados perpendicularmente respecto a los \textit{strips}.
 	
-	Al interior del detector, entre los planos de grafito, se infiltra un gas compuesto por dióxido de carbono y n-pentano. Mediante la aplicación de alto voltaje, se genera un campo eléctrico entre ánodos y cátodos. La figura \ref{img:stgc-field} representa un corte transversal de un detector y sus lineas de cambo eléctrico desde ánodo (cables) hasta cátodos (lámina de grafito superior e inferior).
+	Al interior del detector, entre los planos de grafito, se infiltra un gas compuesto por dióxido de carbono y n-pentano\cite{Formenti2018CERNReport}. Mediante la aplicación de alto voltaje, se genera un campo eléctrico entre ánodos y cátodos. Se utilizan 3000 V$_{DC}$ entre cátodos y ánodos para generar el campo eléctrico, limitando la corriente a 50uA. El gas en su interior puede ser dióxido de carbono puro, con el compromiso de generar mayor cantidad de descargas no asociadas a muones. La figura \ref{img:stgc-field} representa un corte transversal de un detector y sus lineas de cambo eléctrico desde ánodo (cables) hasta cátodos (lámina de grafito superior e inferior). 
 	
-	El paso de muones a través del detector genera la ionización del gas y la liberación de electrones, los cuales son captados por los cables del detector gracias al campo eléctrico.
+	El paso de muones a través del detector genera la ionización del gas y la liberación de electrones, los cuales son captados por los cables del detector gracias al campo eléctrico. El flujo de electrones en el gas ionizado genera pulsos de corriente en los cables, produciendo diferencia de potencial en los cátodos. Esta diferencia de potencial interactúa con los \textit{pads} y \textit{strips} en el exterior del detector, generando pulsos de voltaje en estas zonas conductoras, pero con polaridad inversa respecto a la corriente presente en los cables. En la Figura \ref{fig:sistema-completo}, este pulso de voltaje correspondiente a la señal de salida de un canal de detección está representado por el pulso verde dibujado en la zona central de la imagen.
 	
-	El flujo de electrones en el gas ionizado genera pulsos de corriente en los cables, produciendo a la vez diferencias de potencial en los cátodos. Estos últimos interactúan con los \textit{pads} y \textit{strips} en el exterior del detector, en los cuales aparecen pulsos de corriente con polarizad inversa respecto a los cables.
-	
-	La amplitud de los pulsos generados en el detector será mayor en torno a la zona del evento ionizante y menor en zonas lejos de ella. Esto permite relacionar la posición y energía de la partícula con las amplitudes de los pulsos en cada \textit{strip} o cable.
+	La amplitud de los pulsos generados en el detector será mayor en torno al vértice de interacción y menor en zonas lejos de él. Esto permite relacionar la posición y energía de la partícula con las amplitudes de los pulsos en cada \textit{strip} o cable medido.
 	
 	\begin{figure}[h]
 		\centering
@@ -43,15 +42,10 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 		\label{img:stgc-field}
 	\end{figure}
 
-\newpage
 \section{Detector sTGC utilizado}
-	En ATLAS se leen señales provenientes de cátodos y ánodos a la vez. Esto permite trazar coordenadas de posición para cada evento, ya que los \textit{strips} son perpendiculares a los cables. En este proyecto de titulación se leerán solo las señales provenientes de los \textit{strips}, por los que solo se estaría midiendo un eje de posición. 
+	En ATLAS se leen señales provenientes de cátodos y ánodos a la vez. Esto permite trazar coordenadas de posición para cada evento, ya que los \textit{strips} son perpendiculares a los cables. Por ejemplo, es posible trazar cuadrantes de strips Vs cables para determinar los vértices de interacción: si un muón interactúa con un cable y un strip al mismo tiempo, entonces significa que el vértice de interacción se ubica en las cercanías de la intersección entre ese cable y ese strip. En este proyecto de titulación se leerán solo las señales provenientes de los \textit{strips}, por los que solo se estaría midiendo un eje de posición, siendo necesario agregar un segundo eje coordenado para determinar los vértices de interacción.
 	
-	Para agregar un eje adicional, se reemplazan los \textit{pads} de la cara superior por \textit{strips} perpendiculares a los del plano contrario. Así se logra tener información bidimensional del paso de una partícula leyendo solo las señales provenientes de \textit{strips}. La figura \ref{img:stgc-mini-estructura} ilustra la composición del detector capa por capa y detalla la orientación de cables y \textit{strips}.
-	
-	En particular, el detector utilizado cuenta con 8 \textit{strips} útiles por lado, de 15 centímetros largo y 1 centímetro de ancho cada uno. Una fotografía de este detector se incluye en la figura \ref{img:foto-mini-stgc}. La figura \ref{img:cuadrantes-ministgc} indica las etiquetas asociadas para cada canal del detector, desde su vista superior concordante con la figura \ref{img:foto-mini-stgc}.
-	
-	Se utilizan 3000 $V_{DC}$ entre cátodos y ánodos para generar el campo eléctrico, limitando la corriente a 50uA. El gas en su interior puede ser dióxido de carbono puro, con el compromiso de generar mayor cantidad de descargas no asociadas a muones.
+	Para agregar un eje coordenado adicional, se reemplazan los \textit{pads} de la cara superior por \textit{strips} perpendiculares a los del plano contrario. Así se logra tener información bidimensional del paso de una partícula leyendo solo las señales provenientes de \textit{strips} perpendiculares entre si. La figura \ref{img:stgc-mini-estructura} ilustra la composición del detector capa por capa y detalla la orientación de cables y \textit{strips}.
 	
 	\begin{figure}[h]
 		\centering
@@ -60,37 +54,39 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 		\label{img:stgc-mini-estructura}
 	\end{figure}
 
-\newpage
+	En particular, el detector utilizado cuenta con 8 \textit{strips} útiles por cada cara, de 15 centímetros largo y 1 centímetro de ancho cada uno. Una fotografía de este detector se incluye en la figura \ref{img:foto-mini-stgc}. En la parte superior de la fotografía se observan tubos para el flujo de gas. Por abajo se observan 8 cables coaxiales conectados a los \textit{strips} de la cara superior del detector. A la izquierda están situados los otros 8 cables correspondientes a los \textit{strips} de la cara inferior. En el costado derecho existe una red resistiva para la lectura de cables internos del detector, los cuales no serán utilizados en este proyecto.
+	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.067]{mini-stgc.jpg}
-		\caption{Vista superior del detector. Arriba se observan tubos para el flujo de gas. Abajo se ubican 8 cables coaxiales conectados a los \textit{strips} de una cara del detector. A la izquierda están situados los otros 8 cables correspondientes a los \textit{strips} de la cara inferior. En el costado derecho existe una red resistiva para la lectura de cables internos del detector, los cuales no serán utilizados en este proyecto.}
+		\caption{Vista superior del detector prototipo.}
 		\label{img:foto-mini-stgc}
-	\end{figure}
-
+	\end{figure}	
+	
+	Dado que los strips de la cara superior del detector son perpendiculares a los de la cara inferior, es posible interpretar el detector como un cuadrante de ejes coordenados según se ilustra en la Figura \ref{img:cuadrantes-ministgc}. En esta figura, cada cuadro representa un área de detección de 1cm$^2$, la cual corresponde a la precisión para la determinación de los vértices de interacción. Como el detector posee 8 strips por cara, se tiene un total de 16 canales de detección, los que en su conjunto forman 64 zonas de detección de 1cm$^2$. Los strips de la cara superior se nombrarán como el eje X, mientras que los strips correspondientes a la cara inferior del detector serán asociados al eje Y, siendo el cuadro (0,0) aquel que se ubica en la zona de detección inferior izquierda.
+	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.55]{cuadrantes-ministgc.pdf}
-		\caption{Vista superior del detector, en donde se indican las etiquetas asociadas a cada canal en función del eje al que pertenece. Cada cuadro representa un área de detección de $1cm^2$.}
+		\caption{Vista superior del detector, en donde se indican las etiquetas asociadas a cada canal en función del eje al que pertenece. Cada cuadro representa un área de detección de 1cm$^2$.}
 		\label{img:cuadrantes-ministgc}
 	\end{figure}
 
-\newpage
 \section{Procedimiento de Operación y Pruebas}
 	Antes de poner en marcha mediciones o experimentos con un nuevo detector, se deben realizar ajustes, caracterizaciones y pruebas que permitan corroborar el correcto funcionamiento del dispositivo. Para esto, se recomienda llevar a cabo una secuencia de experimentos con el fin de comprobar el funcionamiento de cada canal y medir el ruido base, la frecuencia de detección y las amplitudes medias esperadas.
 
 	\subsection{Dispositivos para lectura de señales}
-		Para observar los pulsos captados por el detector, es necesario contar con un sistema de lectura adecuado. Este dispositivo deberá poseer una impedancia de entrada adecuada para evitar reflexiones, así como también deberá contar con una ganancia tal que permita medir sin problemas las señales captadas con un osciloscopio, digitalizador o un sistema para adquisición de datos.
+		Para observar los pulsos captados por el detector, es necesario contar con un sistema de lectura adecuado. Este dispositivo deberá poseer una  baja impedancia, menor a 100$\Omega$ para evitar atenuaciones y reflexiones, así como también deberá contar con una etapa de amplificación tal que permita medir sin problemas las señales captadas con un osciloscopio, digitalizador o un sistema para adquisición de datos. Las señales emitiras por el detector rondan el orden de los milivolts, esto significa que el sistema de lectura debe poseer una ganancia tal que la magnitud de la señal de salida esté dentro de la resolución de voltaje del aparato de medición.
 		
-		Un ejemplo es la tarjeta ASD (\textit{Amplificator, Shaper, Discriminator}), que será utilizada en este proyecto de titulación. Está diseñada para la correcta lectura de \textit{strips} y cables provenientes de detectores TGC. Cuenta con una amplificación inicial de 0.8V/pC de carga y con una segunda etapa capaz de amplificar 7 veces la señal entrante. Además, la primera etapa de amplificación se encarga de darle forma al pulso captado, con el fin extender la señal en el tiempo y facilitar su muestreo.
+		Un ejemplo de sistema de lectura es la interfaz ASD mencionada en \ref{sec:atlas}, que será utilizada en este proyecto de titulación. Está diseñada para la correcta lectura de \textit{strips} y cables provenientes de detectores TGC. Cuenta con una amplificación inicial de 0.8V/pC de carga y con una segunda etapa capaz de amplificar 7 veces la señal entrante. Además, la primera etapa de amplificación de la ASD se encarga de darle forma al pulso captado, con el fin extender la señal en el tiempo y facilitar su muestreo.
 		
-		Esta tarjeta cuenta con salidas digitales de tipo LVDS. Estas señales representan el tiempo que la señal permanece por sobre un umbral arbitrario configurado, el cual será proporcional a la amplitud y por tanto a la carga del pulso medido. Cuenta también con una única señal análoga conectada al canal 16 (\textit{Hit} 15), proveniente de la pre-amplificación. Esta es una señal de monitoreo ideal para realizar pruebas de funcionamiento.
+		%La interfaz ASD cuenta con salidas digitales de tipo LVDS. Estas señales representan el tiempo que la señal permanece por sobre un umbral arbitrario configurado, el cual será proporcional a la amplitud y por tanto a la carga del pulso medido. Cuenta también con una única señal análoga conectada al canal 16 (\textit{Hit} 15), proveniente de la pre-amplificación. Esta es una señal de monitoreo ideal para realizar pruebas de funcionamiento.
 		
 
 	\subsection{Estimación de ruido base}
-		Una vez escogidos los métodos de lectura y las herramientas de muestreo a utilizar, es necesario medir el ruido base del detector. Este ruido corresponde a distorsiones propias del dispositivo, como fugas de corriente, conducción indeseada y ruido electromagnético. Conocerlo permite filtrarlo o ignorarlo en el análisis de eventos.
+		Una vez escogidos los métodos de lectura y las herramientas de muestreo a utilizar, es necesario medir el ruido base del detector. Este ruido corresponde a distorsiones propias del dispositivo, como fugas de corriente, conducción indeseada y ruido electromagnético. Conocerlo permite filtrar el ruido  o ignorarlo en el análisis de eventos.
 		
-		Para realizar esta medición se debe hacer circular el dióxido de carbono (o mezcla de dióxido de carbono y N-Pentano). Antes de proceder a realizar mediciones, es necesario esperar a que el detector haya sido llenado totalmente de gas. Dada su área interior cercana a los 15cm2, el detector se encontrará completamente infiltrado con gas en 20 minutos de operación.
+		Para realizar la medición de ruido base se debe hacer circular el dióxido de carbono (o mezcla de dióxido de carbono y N-Pentano) en el detector. Antes de proceder a realizar mediciones, es necesario esperar a que el detector haya sido llenado totalmente de gas. Dada su área interior cercana a los 15cm$^2$, el detector se encontrará completamente infiltrado con gas tras 20 minutos de operación.
 		
 		Cuando el detector se encuentra totalmente lleno de gas, se procede a medir el ruido base en cada uno de sus canales, sin conectar el detector a su fuente de alto voltaje. Estas mediciones permiten generar histogramas de ruido, los cuales han de tener una distribución gaussiana en condiciones normales de operación.
 		
@@ -101,14 +97,10 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 	\subsection{Observación de falsas detecciones}
 		Para una fiel interpretación de la información captada por un detector, es importante conocer la distribución y frecuencia de detecciones que no correspondan a cruce de muones. La medición de estos parámetros requiere la generación del campo eléctrico dentro del detector conectando su respectiva fuente de alto voltaje.
 		
-		Una vez generado el campo eléctrico, es posible captar falsas detecciones o disparos aleatorios producto de la conductividad de los materiales, fugas de corriente y pasos de otras partículas cargadas. Estos eventos suelen tener una distribución normal y ser de amplitudes mayores a la de interés (muones). Conocer esta información permite ignorar señales sobre un umbral tal que se correspondan con amplitudes de eventos no deseados.
+		Una vez generado el campo eléctrico, es posible captar falsas detecciones o disparos aleatorios producto de la conductividad de los materiales o fugas de corriente. Estos eventos suelen tener una distribución normal y ser de amplitudes mayores a la de interés (muones). Conocer esta información permite ignorar señales sobre un umbral tal que se correspondan con amplitudes de eventos no deseados.
 	
-	\subsection{Observación de eventos provenientes de fuentes radioactivas}
+	\subsection{Detección de partículas}
 		Para comprobar el correcto funcionamiento del detector, es de gran utilidad utilizar fuentes radioactivas para generar pulsos de prueba. Aunque una fuente radioactiva de rayos Gamma genera pulsos de mayor amplitud que eventos producidos por muones, esta permite comprobar la correcta operación de cada canal y la distribución de carga del evento en cada canal adyacente.
 	
-	\subsection{Observación de eventos provenientes de rayos cósmicos}
-		Una última prueba a realizar corresponde a la observación de eventos provenientes de muones cósmicos. Esto puede llevarse a cabo utilizando detectores con material centelleante, fibras colectoras de luz y fotocontadores en su interior. Si bien estos dispositivos pueden detectar de manera confiable el paso de muones, no son capaces de dar una buena resolución espacial.
+		Para el caso de detección de muones, es importante contar con un sistema de disparo para ignorar detecciones provenientes de otras partículas cargadas capaces de ionizar el gas al interior del detector. Para el caso de sTGC, se cuenta con el sistema de detectores centelladores mencionados con anterioridad e ilustrados en la Figura \ref{fig:sistema-completo}. Se recomienda posicionar uno de estos detectores sobre el detector sTGC, cubriendo un área igual a la que abarque el sTGC. Si es posible, se recomienda incluir un segundo detector centellador por debajo, para generar una señal de disparo conjunta con el centellador superior. Esto permite descartar incidencias casi horizontales de muones, pasando por un centellador pero no por el detector sTGC.
 		
-		Se recomienda posicionar uno de estos detectores sobre el detector TGC, cubriendo un área igual a la que abarca este último. Si es posible, se recomienda incluir un segundo detector centelleante por debajo, para generar una señal de disparo conjunta con el centelleante superior. Esto permite descartar incidencias casi horizontales de muones, pasando por un centelleante pero no por el detector TGC.
-		
-		Estos experimentos de observación permiten conocer amplitudes medias de muones esperados, su distribución y la frecuencia de cruce. Con esta información es posible corroborar e interpretar futuras mediciones.
