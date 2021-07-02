@@ -1,0 +1,92 @@
+Un sistema de control de versiones, como \textit{git}, permite al desarrollador mantener múltiples ramas de desarrollo, permite sincronizar su trabajo con otros, ayuda a revertir cambios y mantiene una versión ordenada de un proyecto. Usar este tipo de herramientas para el desarrollo de proyectos en Vivado Desing Suite resulta ser muy útil. En este apéndice se resumen todos los consejos y etapas para llevar el control de versiones de un proyecto Vivado a modo de un tutorial paso a paso. La principal idea de este método es llevar registro solo de los archivos principales del sistema a desarrollar, dejando fuera cualquier otro archivo provenientes de etapas de síntesis, implementación o archivos generados por Vivado. Para la realización del tutorial se hace uso del sistema de control de versiones \textit{git} en conjunto con la plataforma online \textit{github.com}.
+
+Para proceder con el tutorial, se deben contar con los siguientes requisitos:
+\begin{itemize}
+	\item Una cuenta en github.com
+	\item El software de control de versiones \textit{git} instalado en el computador y habilitado para ser operado mediante un terminal de comandos
+	\item Tener instalados Vivado Design Suite (La versión utilizada en este tutorial corresponde a la 2019.1)
+\end{itemize}{
+
+\section{Crear un repositorio}
+
+Para comenzar, se debe iniciar sesión en GitHub.com y hacer clic en el botón verde ubicado en la esquina superior izquierda que dice ``New''.
+
+IMAGE
+
+Se debe elegir el nombre del repositorio y configurar lo esencial. Se recomienda crear un proyecto en blanco, sin archivo \textit{readme} o \textit{.gitignore}, ya que pueden ser subidas al repositorio de manera remota durante el primer commit.
+
+\section{Clonar un repositorio}
+
+Desde la interfaz web del repositorio de Github.com, se debe buscar el botó verde llamado ``Code'' (ubicado en la esquina superior izquierda) y copiar en el portapapeles la URL\textit{} disponible para clonar el repositorio mediante HTTPS.
+
+Si aún no se tiene instalado \textit{git} en el computador, se debe proceder a su instalación via consola o mediante descarga directa. Luego, se debe acceder a la carpeta donde se quiere guardar el repositorio con los archivos esenciales de proyecto Vivado para abrir en ella una consola de comandos. En la consola, escribir lo siguiente:
+
+CODIGO
+%git clone your-git-url
+
+\section{Crear los archivos iniciales y carpetas}
+
+Para crear los primeros archivos, se debe acceder a la carpeta escogida para el repositorio y crear nuevas carpetas llamadas \textit{ip}, \textit{src},  \textit{sim}, \textit{wd} y \textit{xdc.
+
+\begin{itemize}
+	\item \textit{ip}: Esta carpeta incluirá los archivos asociados a IP Cores.
+	\item \textit{src}: Esta carpeta es la indicada para guardar los archivos con código HDL.
+	\item \textit{sim}: Carpeta para almacenar \textit{testbenchs}.
+	\item \textit{xdc}: Carpeta destinada a guardar archivos XDC para restricciones y declaraciones de puertos.
+	\item \textit{wd}: Finalmente, esta carpeta es la indicada para guardar los archivos generados automáticamente por Vivado durante las etapas de síntesis e implementación. Esta carpeta no debe ser incluida en los \textit{commits}, ya que contiene precisamente la información a la cual no queremos hacer  seguimiento.	
+\end{itemize}
+
+Luego se puede crear un archivo \textit{README.md} y uno \textit{.gitinit}. El archivo \textit{README.md} es relevante para explicar el contenido del repositorio, y debe ser escrito en lenguaje \textit{Markdown}. En el archivo \textit{.gitinit} se deben incluir todos los formatos de archivo que no quieran ser subidos al repositorio, como archivos creados automáticamente por el sistema o la carpeta \textit{wd} mencionada anteriormente. Se sugiere agregar las siguientes lineas:
+CODIGO
+%wd/
+%.Xil/
+
+\section{Preparar el proyecto}
+Primero, se debe crear un proyecto de manera habitual, guardándolo en la carpeta \textit{wd} anteriormente creada. Si el proyecto ya existía desde antes, basta con trasladar la carpeta completa y guardarla en el interior de \textit{wd}. Luego, deben copiar o crear los archivos fuente del diseño en HDL en la carpeta \textit{src}. Así mismo debe ser con los archivos de simulación y \textit{constraints} en sus respectivas carpetas.
+
+Si el diseño de hardware utiliza IP Cores, hay que asegurarse de habilitar la opción de \textit{IP Core Containers} en Vivado. Esta opción se encuentra en el menú \textit{Tools>Settings>Project Settings>IP>Core Containers: Use Core Containers for IP}y permite crear un archivo \textit{.xcix} que contiene el IP Core en su totalidad, lo que facilita el control de versiones. Si Vivado pregunta por convertir el IP Core actual a un \textit{container}, dar clic en \textit{OK}. Una vez creados los \textit{containters}, de deben mover a la carpeta correspondiente \textit{ip} en el repositorio
+
+IMAGE
+%The IP Containers option is under "Tools>Settings>Project Settings>IP>Core Containers: Use Core Containers for IP".
+
+Finalmente, se deben importar los archivos de las carpetas \textit{src, sim, xdc} e \textit{ip} al proyecto en la interfaz de vivado.
+
+\section{Exportar script TCL}
+
+Desde la interfaz de Vivado, se debe exportar el archivo \textit{Tcl} asociado al proyecto creado accediendo a \textit{File>Project>Write Tcl} y guardándolo con el nombre \textit{build.tcl} en la carpeta principal de repositorio, no en las subcarpetas creadas. Se debe tener encuentra que el proceso de exportación y edición del archivo Tcl debe realizarse cada vez que se crea o elimina un nuevo archivo fuente del proyecto. En caso de no hacerlo, el script no generará el proyecto completo y habrá que importar los archivos de manera manual
+
+\section{Editar script TCL}
+Un paso importante en este proceso es la edición del archivo Tcl, para que así se generen automáticamente los archivos de Vivado en la carpeta \textit{wd}. Para lograrlo, se debe abrir el archivo \textit{build.tcl} en un editor de texto y buscar los siguientes comandos:
+
+%Edit your Tcl file to rebuild the project just inside "wd" folder. To do this, search the following three commands:
+%
+%# Set the reference directory for source file relative paths (by default the value is script directory path)
+%set origin_dir "."
+%# Set the directory path for the original project from where this script was exported
+%set orig_proj_dir "path-to-the-actual-vivado-project"
+%
+%# Create project
+%create_project ${_xil_proj_name_} ./${_xil_proj_name_} -part part-of-your-fpga
+
+Una vez ubicados, se deben reemplazar por los siguientes comandos:
+%And replace them with the following lines respectively:
+%
+%# Set the reference directory for source file relative paths (by default the value is script directory path)
+%set origin_dir [file dirname [info script]]
+%# Set the directory path for the original project from where this script was exported
+%set orig_proj_dir "[file normalize "$origin_dir/wd/"]"
+%
+%# Create project
+%create_project ${_xil_proj_name_} $orig_proj_dir/${_xil_proj_name_} -part part-of-your-fpga
+
+\section{Confirmar y subir los archivos al repositorio remoto}
+
+A este unto, todo se encuentra listo para realizar el primer \textit{commit} en git y comenzar el control de versiones del proyecto Vivado mediante el siguiente comando en consola:
+CODIGO
+%
+%git add .
+%git commit -m "First commit."
+%git push
+%And that's all!
+%
+ Finalmente el control de versiones se encuentra correctamente configurado y es seguro eliminar el proyecto Vivado de otras ubicaciones fuera del repositorio, ya que el proyecto puede ser reconstruido completamente al ejecutar el script build.tcl desde la consola tcl de Vivado.

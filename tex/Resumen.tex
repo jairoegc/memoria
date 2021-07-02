@@ -1,4 +1,7 @@
-% Resumen
-resumen
+Los muones son partículas subatómicas originadas por la interacción y decaimiento de otras partículas. Los muobnes se originan principalmente por radiación cósmica proveniente del espacio exterior y son capaces de penetrar en la atmosfera, incluso llegando a la corteza terreste y atravesando la materia que encuentran a su paso. Medir la energía de un muón luego de su paso a través de la materia permite conocer la densidad de los materiales atravesados, por lo que la detección de muones es un área de estudio interesante para análisis de terrenos y estructuras.
 
-\textbf{Palabras claves:} palabras, palabras.
+El ``Sistema de adquisición de datos para detectores de muones'' nace como un requerimiento del CCTVal (Centro Científico Tecnológico de Valparaíso) en  el marco del proyecto ``sTGC Minería'', cuyo objetivo es realizar tomografías muónicas de terreno minero mediante detectores sTGC. Un detector emite señales eléctricas que representan la posición y la energía asociadas al paso de un muon, por lo que se requiere un sistema de adquisición que capture estas señales y las entregue a un posterior sistema de análisis para la caracterización del muon detectado.
+
+En esta memoria de titulación se desarrolla un sistema de adquisición prototipo que cumple las funciones de muestrear señales digitales provenientes de un detector, discriminar la veracidad de la detección mediante la lectura de una señal externa de disparo, y enviar la información capturada hacia un computador externo con el fin de almacenar y procesar los datos adquiridos. El sistema de adquisición debe ser capaz de muestrear 16 señales digitales cuyos tiempos de duración están en el orden de los nanosegundos, y debe diseñarse pensando en su replicación y escalamiento para facilitar la conexión de detectores adicionales. El trabajo de diseñar este sistema sienta un precedente importante para CCTVal, por lo que el proceso de desarrollo y los conocimientos adquiridos se documentan conjuntamente en esta memoria y en el repositorio de Git asociado.
+
+\textbf{Palabras claves:} Detectores sTGC,  Muones, FPGA, Adquisición de Datos.

@@ -65,7 +65,7 @@ El presente capítulo relata el contexto, las principales motivaciones que origi
 	
 	Si bien en este prototipo funcional solo se realizarán pruebas a pequeña escala, se requiere que este sistema sea capaz de operar con detectores de mayor tamaño o con arreglos de varios detectores, permitiendo el análisis de zonas de mayor área o el estudio de trayectorias de partículas con detectores superpuestos. Esto implica que el sistema debe ser de naturaleza modular y escalable, sobre todo en torno a la cantidad de señales que es capaz de procesar.  %\gcnote{\sout{No queda claro que es lo que ya esta hecho y que es lo que haras tu? Estas haciendo el detector completo, o solo el sistema de adquisicion? Explicar mejor. Tambien dejar claro que es un prototipo de cierto tamaño.}}
 	
-	El objetivo principal del sistema a diseñar es determinar los vértices de interacción en el detector. Como objetivo secundario, el proyecto debe ser una herramienta replicable que esté disponible para ser utilizada en nuevos proyectos y experimentos del centro de investigación. Así mismo, el desarrollo y la documentación del proceso debe ser un aporte al conocimiento sobre la implementación de sistemas electrónicos para la detección y análisis de partículas utilizando estas tecnologías, ya que es uno de los primeros en ser desarrollados y probados en CCTVal. %\gcnote{\sout{Esto ultimo deberia plantearse como una motivacion. ''Actualmente no se tiene conocimiento sobre esto, por lo que en este proyecto se busca adquirir experiencia practica...''}}
+	El objetivo principal del sistema a diseñar es entregar los datos que permitan determinar vértices de interacción en un detector. Como objetivo secundario, el proyecto debe ser una herramienta replicable que esté disponible para ser utilizada en nuevos proyectos y experimentos del centro de investigación. Así mismo, el desarrollo y la documentación del proceso debe ser un aporte al conocimiento sobre la implementación de sistemas electrónicos para la detección y análisis de partículas utilizando estas tecnologías, ya que es uno de los primeros en ser desarrollados y probados en CCTVal. %\gcnote{\sout{Esto ultimo deberia plantearse como una motivacion. ''Actualmente no se tiene conocimiento sobre esto, por lo que en este proyecto se busca adquirir experiencia practica...''}}
 	
 	\begin{figure}[t]
 		\centering
@@ -78,7 +78,7 @@ El presente capítulo relata el contexto, las principales motivaciones que origi
 
 	Se espera que este sistema sea capaz de generar información suficiente para representar la ubicación de los vértices de interacción en la superficie del detector, con una resolución de al menos 1cm$^2$.
 	
-	El sistema deberá ser capaz de captar al menos 8 pares de señales, con la opción de ampliarlo a más canales, discriminando interacciones con partículas no deseadas mediante la interpretacuión de la señal de disparo.
+	El sistema deberá ser capaz de captar al menos 8 pares de señales, con la opción de ampliarlo a más canales, discriminando interacciones con partículas no deseadas mediante la interpretación de la señal de disparo.
 	
 	La información generada pasará a etapas siguientes de análisis o de representación gráfica, por lo cual es importante que el sistema sea capaz de entregar información pertinentemente ordenada y seleccionada para dichos fines. La información debe ser enviada de manera tal que permita distinguir un evento de otro y reconocer el canal del detector asociado a cada señal captada.
 	

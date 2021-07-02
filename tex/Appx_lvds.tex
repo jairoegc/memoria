@@ -1,0 +1,53 @@
+Este proyecto basa su funcionalidad en un enlace de datos físicos ente una FPGA y una interfaz de lectura ASD, en donde la interfaz emite pulsos digitales através de emisores LVDS internos y FPGA recibe los pulsos mediante un receptor interno. Este apéndice detalla cómo interconectar dispositivos que utilicen interfaces LVDS en cualquier tipo de proyecto, entendiendo los protocolos y requerimientos necesarios para lograrlo.
+
+\section{Acerca del estándar LVDS}	
+	LVDS (Low Voltage Differential Signaling) es un enlace de datos de capa física, útiles en aplicaciones que requieran principalmente conservar la integridad de los datos, mantener bajo ruido en el medio de transmisión, o cuando el emisor y receptor se encuentran demasiado lejos el uno del otro.
+	
+\section{Características principales}
+	
+	Las interfaces LVDS pueden controlar señales en el rango de los 2V a 5V, con una alta velocidad de transferencia de hasta 500Mbps en un solo par diferencial preservando la integridad de la señal a transmitir y manteniendo una buena inmunidad al ruido y a interferencia por campos electromagnéticos Se caracterizan por ser económicas, de bajo consumo de potencia, pequeñas y de una implementación simple.
+
+	Las interfaces LVDS transfieren datos a través de una linea de par trenzado en la que los voltajes de cada alambre tienen opuesta amplitud de voltaje. Estas señales son montadas sobre un nivel de voltaje continuo típicamente de 1,2V y poseen tan solo 400mV de diferencia de voltaje ente ambos alambres. La Figura IMAGE ilustra estos niveles de voltaje.
+	
+	La Figura IMAGE ilustra las señales LVDS, mostrando primero una señal de una linea para luego ilustrar la señal diferencial en sí misma. V$_{idth}$ (Input Differential Threshold Voltage) corresponde al nivel de voltaje después de que el receptor capura la señal diferencial entrante.  V$_{ob}$ corresponde al alambre con potencial de voltaje positivo,  V$_{oa}$ corresponde al alambre de potencial negativo y  V$_{od}$ representa la diferencia de voltaje final ente el par de alambres.
+	
+	Los las interfaces diferenciales solamente emiten y reciben la diferencia entre los dos alambre que componen la linea de transmisión, eliminando el ruido de modo común en la señal de voltaje asociado a la diferencia de voltaje existente entre la tierra eléctrica , el emisor y el receptor, sumado al ruido propio infiltrado en la linea de transmisión.
+	
+	La implementación de una linea de datos LVDS requiere un emisor, una linea de transmisión, un resistor de 100$\Omega$ y un receptor, como se observa en la Figura IMAGE. El resistor de 100$\Omega$ se debe a la impedancia propia de la linea de transmisión (50$\Omega$) de cada alambre respecto a tierra, junto a una linea de transmisión simétrica se obtiene un medio de comunicación que mantiene la adaptación de impedancia y la integridad de la señal enviada. 
+
+
+\section{Interconexión LVDS para hardware Xilinx Series 7}
+
+	La familia de FPGAS Xilinx 7 series son capaces de operar con señales LVDS tanto en su emisión como recepción, con la opción de habilitar un resistor de 100$\Omega$ en caso de que el circuito conectado no cuente con él. Además, esta familia de FPGAS cuenta con dos tipos de estándar LVDS, el LVDS común que requiere una fuente de 1.8V y se encuentra disponible en los bancos HP (High Performance) de la FPGA, y el están LVDS\_25, el cual necesita una fuente de voltaje de 2,5V para alimentar sus bancos de puertos correspondientes unicamente a los de tipo HR (High Rank). Usar cualquiera de estos dos estándares con su correcta fuente de voltaje permita habilitar o deshabilitar el resistor interno, de lo contrario, en el caso de usar un voltaje diferente se debe mantener el resistor interno desactivado.
+	
+	En particular, la FPGA Artix 7 y la Zynq 7000 tienen solamente bancos HR, por lo que solo está disponible el estándar LVDS\_25, pero las tarjetas Trenz utilizadas en esta memoria de titulación solo cuentan con fuentes de 1,8V, 3,3V y 5V, lo que implica que para utilizar el resistor interno se debe utilizar una fuente de voltaje externa de 2,5V
+
+\section{Descripción de hardware para utilización de puertos LVDS}
+
+	Para operar correctamente utilizando puertos LVDS en la familia de FPGAs Xilinx 7 series es necesario declarar los puertos a utilizar y el voltaje asociado en el archivo de \textit{constraints} XDC. Por ejemplo para utilizar el par diferencial B16\_L22\_P (positivo) y B16\_L22\_N (negativo) ubicados respectivamente en los puertos E22 y D22 de la FPGA, se declararían las siguientes lineas:
+	
+	CODIGO
+
+%set_property -dict {PACKAGE_PIN E22 IOSTANDARD LVDS_25} [get_ports B16_L22_P];
+%set_property -dict {PACKAGE_PIN D22 IOSTANDARD LVDS_25} [get_ports B16_L22_N];
+
+	Finalmente, para poder utilizar correctamente el par diferencial, es necesario utilizar un \textit{IO Buffer} instanciado en el hardware descrito. Estos buffers permiten convertir la señal diferencial a una de un solo terminal o viceversa. Por ejemplo, para usar un par diferencial según el estándar LVDS\_25 habilitando la resistencia interna del puerto, bastaria con declarar un IBUFDS (Input Buffer for Differential Singal) como se indica a continuación:
+	
+	CODIGO:
+
+
+%// IBUFDS: Differential Input Buffer - Verilog
+%// 7 Series
+%// Xilinx HDL Libraries Guide, version 13.4
+%IBUFDS #(
+%    .DIFF_TERM("TRUE"), // Differential Termination (TRUE or FALSE)
+%    .IBUF_LOW_PWR("FALSE"), // Low power="TRUE", Highest performance="FALSE"
+%    .IOSTANDARD("LVDS_25") // Specify the input I/O standard (LVDS or LVDS_25)
+%    ) IBUFDS_LVDS_25 (
+%    .O(lvds_output), // Buffer output
+%    .I(B16_L22_P), // Diff_p buffer input (connect directly to top-level port)
+%    .IB(B16_L22_N) // Diff_n buffer input (connect directly to top-level port)
+%);
+%// End of IBUFDS_inst instantiation
+
+Siguiendo estos pasos, el receptor LVDS queda correctamente configurado. Para utilizar el receptor basta con conectar las respectivas señales diferenciales en los puertos correspondientes declarados en el diseño y utilizar un cable de par trenzado simétrico con una impedencia de 50$\Omega$.
