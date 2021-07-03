@@ -1,23 +1,6 @@
 
 La detección de muones en este proyecto es realizada mediante un detector de partículas inspirado en los detectores sTGC del experimento ATLAS, como se mencionó en la Sección \sgcnote{Cuando hablas de una seccion o figura especifica (con numero), debe ir con mayuscula.} \ref{par:smallwheel}. Los detectores originales se ubican en la llamada Small Wheel de ATLAS, formando parte del Espectrómetro de Muones, el cual se encarga de determinar el momento y la trayectoria de los muones emitidos por las colisiones. Para el proyecto sTGC minería CCTVal construyó \sgcnote{quien, cuando, donde?} un prototipo de detector sTGC a menor escala utilizando la misma tecnología de fabricación presente en los detectores originales. En esta sección se describe la estructura de un sTGC original y la del prototipo en cuestión, incluyendo información sobre el funcionamiento y operación del prototipo de detector sTGC fabricado en CCTVal.
 
-%La sigla significa de los ''small Thin Gap Chamber", y forman parte de un espectrómetro de muones para conocer momento y trayectoria de estas partículas. Esta información permite la reconstrucción de eventos asociados a colisiones de partículas. La figura \ref{img:atlas-layout} ilustra la ubicación de los detecotres de muones dentro del espectrómetro de ATLAS, en el costado superior derecho. La figura \ref{img:atlas-tgc} corresponde a una fotografía de los detectores TGC involucrados en este espectrómetro.
-
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[scale=0.3]{atlas-muon-spectrometer-layout.png}
-%	\caption{Diagrama del espectrómetro de muones en el experimento ATLAS\cite{DiehlE2009ATLASCommissioning}.}
-%	\label{img:atlas-layout}
-%\end{figure}
-%
-%\newpage
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[scale=0.3]{atlas-muon-tgc.jpg}
-%	\caption{Fotografía del los detectores sTGC en el espectrómetro de muones del experimento ATLAS\cite{ATLASExperiment2020MuonSpectometer}. El diámetro de este dispositivo es cercano a 24 metros.}
-%	\label{img:atlas-tgc}
-%\end{figure}
-
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=0.7]{tgc-structure.png}
@@ -27,18 +10,18 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 
 \subsection{Estructura general}  \sgcnote{subsecciones}
 
-	Un sTGC está compuesto por dos planos de grafito (cátodos), con múltiples cables en medio (ánodos)\cite{Formenti2018CERNReport}, tal como se observa en la figura \ref{img:stgc-structure}. Recubriendo el exterior de ambos cátodos se ubican capas aislantes que separan los cátodos de las zonas conductoras, llamadas ``\textit{pads}'' en la cara superior y ``\textit{strips}'' en la cara inferior del detector, diferenciandose en la forma y área que abarca cada uno. Los \textit{strips} corresponden a delgados rectangulos de cobre, mientras que los \textit{pads} son mantos más anchos de cobre, equivalente al área de varios \textit{strips}. \sgcnote{cual es la diferencia entre ambos? Como esta escrito, pareciera que la unica diferencia es que unos estan arriba y otros estan abajo.}. Los cables al interior del detector se encuentran orientados perpendicularmente respecto a los \textit{strips} y en paralelo a los \textit{pads}.
+	Un sTGC está compuesto por dos planos de grafito (cátodos), con múltiples cables en medio (ánodos)\cite{Formenti2018CERNReport}, tal como se observa en la figura \ref{img:stgc-structure}. Recubriendo el exterior de ambos cátodos se ubican capas aislantes que separan los cátodos de las zonas conductoras, llamadas ``\textit{pads}'' en la cara superior y ``\textit{strips}'' en la cara inferior del detector, diferenciándose en la forma y área que abarca cada uno. Los \textit{strips} corresponden a delgados rectángulos de cobre, mientras que los \textit{pads} son mantos sw cobre más anchos, equivalentes al área de varios \textit{strips}. \sgcnote{cual es la diferencia entre ambos? Como esta escrito, pareciera que la unica diferencia es que unos estan arriba y otros estan abajo.}. Los cables al interior del detector se encuentran orientados perpendicularmente respecto a los \textit{strips} y en paralelo a los \textit{pads}.
 	
-	Al interior del detector, entre los planos de grafito, se infiltra un gas compuesto por dióxido de carbono y n-pentano\cite{Formenti2018CERNReport}. Mediante la aplicación de alto voltaje, se genera un campo eléctrico entre ánodos y cátodos. Se utilizan 3000 V$_{DC}$ entre cátodos y ánodos para generar el campo eléctrico, limitando la corriente a 50uA. El gas en su interior puede ser dióxido de carbono puro, con el compromiso de generar mayor cantidad de descargas no asociadas a muones. La figura \ref{img:stgc-field} representa un corte transversal de un detector y sus líneas de cambo eléctrico desde ánodo (cables) hasta cátodos (lámina de grafito superior e inferior). 
+	Al interior del detector, entre los planos de grafito, se infiltra un gas compuesto por dióxido de carbono y n-pentano\cite{Formenti2018CERNReport}. Mediante la aplicación de alto voltaje, se genera un campo eléctrico entre ánodos y cátodos. Se utilizan 3000 V$_{DC}$ entre cátodos y ánodos para generar el campo eléctrico, limitando la corriente a 50uA. El gas en su interior puede ser dióxido de carbono puro, con el compromiso de generar mayor cantidad de descargas no asociadas a muones. La figura \ref{img:stgc-field} representa un corte transversal de un detector y sus líneas de campo eléctrico desde ánodo (cables) hasta cátodos (lámina de grafito superior e inferior). 
 	
-	El paso de muones a través del detector genera la ionización del gas y la liberación de electrones, los cuales son captados por los cables del detector gracias al campo eléctrico. El flujo de electrones en el gas ionizado genera pulsos de corriente en los cables, produciendo diferencia de potencial en los cátodos. Esta diferencia de potencial interactúa con los \textit{pads} y \textit{strips} en el exterior del detector, generando pulsos de voltaje en estas zonas conductoras, pero con polaridad inversa respecto a la corriente presente en los cables. En la Figura \ref{fig:sistema-completo}, este pulso de voltaje correspondiente a la señal de salida de un canal de detección está representado por el pulso verde dibujado en la zona central de la imagen.
+	El paso de muones a través del detector genera la ionización del gas y la liberación de electrones, los cuales son captados por los cables del detector gracias al campo eléctrico. El flujo de electrones en el gas ionizado genera pulsos de corriente en los cables, produciendo diferencia de potencial en los cátodos. Esta diferencia de potencial interactúa con los \textit{pads} y \textit{strips} en el exterior del detector, generando pulsos de voltaje en estas zonas conductoras, pero con polaridad inversa respecto a la corriente presente en los cables. En la Figura \ref{fig:sistema-completo}, el pulso de voltaje correspondiente a la señal de salida de un canal de detección está representado por el pulso verde dibujado en la zona central de la imagen.
 	
 	La amplitud de los pulsos generados en el detector será mayor en torno al vértice de interacción y menor en zonas lejos de él. Esto permite relacionar la posición y energía de la partícula con las amplitudes de los pulsos en cada \textit{strip} o cable medido.
 	
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{stgc-transversal.png}
-		\caption{Lineas de campo eléctrico observadas en un corte transversal de los cables y cátodos del detector. Los cátodos se ilustran en celeste, los cables se representan en negro \hl{No se ve el negro} , y las lineas de campo corresponden a las flechas de color rojo\cite{DeSmet2011StudyLab}.}
+		\caption{Lineas de campo eléctrico observadas en un corte transversal de los cables y cátodos del detector. Los cátodos se ilustran en celeste, los cables se representan en negro, y las lineas de campo corresponden a las flechas de color rojo\cite{DeSmet2011StudyLab}.}
 		\label{img:stgc-field}
 	\end{figure}
 
