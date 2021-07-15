@@ -13,6 +13,7 @@ La Figura \ref{img:asd-board} corresponde a una fotografía de esta interfaz, de
 % \usepackage{booktabs}
 \begin{table}[]
 	\centering
+	\caption{Detalle de los puertos en el conector de 40 posiciones en la interfaz ASD.}
 	\begin{tabular}{@{}llll@{}}
 		\toprule
 		\textbf{Pin} & \textbf{Nombre} & \textbf{Nombre}                & \textbf{Pin} \\ \midrule
@@ -37,11 +38,10 @@ La Figura \ref{img:asd-board} corresponde a una fotografía de esta interfaz, de
 		37           & hit 14          & $\overline{\mbox{hit 14}}$     & 38           \\
 		39           & hit 15          & $\overline{\mbox{hit 15}}$     & 40           \\ \bottomrule
 	\end{tabular}
-	\caption{Detalle de los puertos en el conector de 40 posiciones en la interfaz ASD.}
 	\label{tab:asd-ports}
 \end{table}
 
-Como su acrónimo lo indica, la interfaz ASD (Amplificator-Shaper-Discriminator) amplifica la carga eléctrica captada desde un canal de un detector, modifica la forma del pulso eléctrico en cuanto a su tiempo de duración y a su amplitud de corriente con el fin de simplificar su posterior medición, y discrimina la amplitud del pulso mediante un circuito comparador. Esta comparación se realiza respecto a un nivel de voltaje ajustable para así descartar eventos de energía que estén por debajo el umbral de interés, y también para generar una señal de salida digital LVDS (Low-Voltage Differential signal)\cite{1996IEEESociety} cuya duración sea proporcional a la amplitud de pulso que ha estado por sobre el umbral de voltaje configurado. Esta técnica se conoce como TOT (Time-Over-Threshold) y es la mísma técnica utilizada en el detector LabPet II descrito en la sección \ref{par:labpet}.  En la Figura \ref{fig:sistema-completo}, este pulso digital se representa como el pulso digital azul entre la interfaz de lectura y el sistema de adquisición de datos.
+Como su acrónimo lo indica, la interfaz ASD (Amplificator-Shaper-Discriminator) amplifica la carga eléctrica captada desde un canal de un detector, modifica la forma del pulso eléctrico en cuanto a su tiempo de duración y a su amplitud de corriente con el fin de simplificar su posterior medición, y discrimina la amplitud del pulso mediante un circuito comparador. Esta comparación se realiza respecto a un nivel de voltaje ajustable para así descartar eventos de energía que estén por debajo el umbral de interés, y también para generar una señal de salida digital LVDS (Low-Voltage Differential signal)\cite{1996IEEESociety} cuya duración sea proporcional a la amplitud de pulso que ha estado por sobre el umbral de voltaje configurado. Esta técnica se conoce como TOT (Time-Over-Threshold) y es la mísma técnica utilizada en el detector LabPet II descrito en la sección \ref{par:labpet}.  En la Figura \ref{fig:sistema-completo}, este pulso digital se representa como el pulso digital rojo entre la interfaz de lectura y el sistema de adquisición de datos.
         
 La interfaz ASD será utilizada conectándola a los \textit{strips} de los detectores sTGC fabricados para sTGC Minería. Dado que la interfaz posee 16 canales de entrada, es posible conectar los 16 canales de detección proveniente de un mismo detector prototipo sTGC. Así, con un solo detector y una interfaz es posible determinar vértices de interacción en un área de 225cm$^2$. Para un futuro escalamiento, utilizando dos detectores superpuestos y sus respectivas interfaces es posible determinar la trayectoria de los muones detectados. Además, analizar la duración de cada pulso emitido por las interfaces permite estimar la amplitud de la carga eléctrica depositada por el muon en el detector excitado.
 
@@ -53,7 +53,7 @@ Esta interfaz requiere una fuente de voltaje de $\pm$3V\cite{1999ATLASICs}, es c
 
 En la Figura \ref{img:asd-circuit} se ilustra el circuito principal incluido en cada canal de la interfaz ASD. Cada canal tiene su propio preamplificador, un amplificador principal y un comparador\cite{1999ATLASICs}, donde la etapa de preamplificación tiene una ganancia de 0.8V/pC y el amplificador principal tiene una ganancia de 7 veces la señal entrante. La etapa de comparación compara la señal con un nivel de voltaje externo llamado \textit{V$_{th}$}. Si el pulso entrante tiene una amplitud de voltaje superior a $\frac{V_{th}}{2}$, el comparador emite una señal LVDS con una duración equivalente al tiempo durante el cual la amplitud del pulso entrante se mantuvo por sobre $\frac{V_{th}}{2}$. V$_{th}$ puede configurarse en un rango desde -0.5V a +0.5V, resultando en un umbral real de -0.25V a +0.25V en el comparador\cite{1999ATLASICs}. Así, es capaz de emitir señales digitales con duraciones entre 25ns y 45ns para pulsos de entrada con cargas entre 0.1pC y 0.5pC respectivamente.
 
-Las señales digitales LVDS emitidas por las etapas de comparación incluidas en la interfaz ASD corresponden a las señales a ser muestreadas por el sistema de adquisición a diseñar en esta memoria de titulación. En el Capítulo \ref{cap:sdet} se define el sistema de adquisición en base a la cantidad, formato y duración de estas señales digitales.
+Las señales digitales LVDS emitidas por las etapas de comparación incluidas en la interfaz ASD corresponden a las señales a ser muestreadas por el sistema de adquisición a diseñar en esta memoria de titulación. En el Capítulo \ref{cap:sadq} se define el sistema de adquisición en base a la cantidad, formato y duración de estas señales digitales.
 
 \begin{figure}[h]
 	\centering
@@ -62,27 +62,7 @@ Las señales digitales LVDS emitidas por las etapas de comparación incluidas en
 	\label{img:asd-circuit}
 \end{figure}
 
-%\subsection{Ejemplo de operación}
-%
-%Por ejemplo, para un pulso proveniente de un cátodo (pulso de polaridad positiva) de 0.3pC, el voltaje esperado a la salida de la etapa de preamplificación es 240mV. La salida analógica LEMO podría reflejar un voltaje menor debido a la impedancia de la carga conectada para su lectura. Con una ganancia de 7 veces, el voltaje esperado a la salida del amplificador principal sería de 1,68V. La duración del pulso analógico sería aproximadamente 70ns, suponiendo un canto de subida con 10ns de duración y una carga proporcional a la carga de entrada. Con un voltaje V$_{th}$ de 180mV, la señal digital de salida tendría una duración de aproximadamente 50ns.
-%
-%La Figura \ref{img:charge-injector-output} incluye un pulso de 0.3pC de carga eléctrica, mientras que la Figura \ref{img:asd-analog-output} muestra la señal analógica en el conector LEMO. La salida LEMO presenta una amplitud de 180mV, 25\% más bajo de lo esperado, probablemente debido a la impedancia de entrada del osciloscopio utilizado para su medición
+\sgcnote{y esto es relevante? afecta el funcionamiento?  Falta tambien una frase de cierre que concluya y conecte con la siguientes seccion.}
+\sjgnote{Pensandolo bien yo diria que no es relevante este ejemplo y la diferencia entre valor esperado y medido no afecta al funcionamiento, porque se debe principalmente a que fue medido con los cables y herramientas incorrectos. Comente esta subseccion para quitarlo del escrito.}
 
-\gcnote{y esto es relevante? afecta el funcionamiento?  Falta tambien una frase de cierre que concluya y conecte con la siguientes seccion.}
-\jgnote{Pensandolo bien yo diria que no es relevante este ejemplo y la diferencia entre valor esperado y medido no afecta al funcionamiento, porque se debe principalmente a que fue medido con los cables y herramientas incorrectos. Comenté esta subseccion para quitarlo del escrito.}
-%
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[scale=0.43]{charge-injector-output.png}
-%	\caption{Captura de pantalla de un pulso de voltaje con carga equivalente a 0.3pC, medido en un osciloscopio.}
-%	\label{img:charge-injector-output}
-%\end{figure}
-%
-%\begin{figure}[h]
-%	\centering
-%	\includegraphics[scale=0.43]{asd-analog-output.png}
-%	\caption{Captura de pantalla de un osciloscopio, en la cual se ilustra un pulso de voltaje proveniente de la salida analógica LEMO de la interfaz ASD luego de haber recibido un pulso de 0.3pC de carga eléctrica.}
-%	\label{img:asd-analog-output}
-%\end{figure}
-%
 
