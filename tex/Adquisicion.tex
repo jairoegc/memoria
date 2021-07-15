@@ -36,7 +36,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 			\label{img:diagrama}
 		\end{figure}
 	
-	\subsection{Plataforma}
+	\subsection{Plataforma de desarrollo utilizada}
 		Según los casos de estudio presentados en el Capítulo \ref{cap:art}, la alternativa más utilizada para la implementación de hardware es la FPGA, herramienta que se ha visto con mayor frecuencia en proyectos relativos a física de partículas y adquisición de datos. Las FPGAs cuentan con una cantidad significativa de recursos lógicos para cómputo paralelo y otros periféricos, incluyendo además hardware dedicado para comunicación, serialización y almacenamiento de datos. Una desventaja conocida corresponde a que se basan en memorias volátiles, por lo que el hardware descrito debe ser reconfigurado cada vez que se enciende, por lo que los datos importantes deben ser almacenados en memorias externas.
 		
 		En concreto, el sistema de adquisición debe contar con al menos 16 pares de puertos LVDS para interconectar una interfaz ASD, unidades de memoria para almacenar los eventos capturados, una frecuencia de reloj configurable lo más cercana a 1GHz posible, lógica programable para la descripción de máquinas sincrónicas e interfaces de comunicación para enviar los datos adquiridos hacia sistemas de cómputo externo. Todo esto basado en los requerimientos descritos al inicio de la presente Sección \ref{sec:arq}.
@@ -53,7 +53,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 			\label{fig:trenz}
 		\end{figure}
 	
-	\subsection{Sistema de Adquisición Propuesto}
+	\subsection{Sistema de adquisición propuesto}
 		La arquitectura del sistema de adquisición que se implementará en el módulo Trenz se ilustra en la Figura \ref{fig:muon-daq}. Se propone utilizar un módulo de muestreo (\textit{Sampler}), un buffer de eventos (\textit{Event Buffer}, FIFO), un módulo de lectura para comunicar los datos (\textit{Event Reader}), y un módulo de comunicación implementado en el procesador (GPIO, UART). Este sistema permite la adquisición de datos provenientes de un solo detector de muones, conectándose directamente a la interfaz ASD y a la señal generada por el sistema de disparo.
 		
 		El módulo \textit{Sampler} se encarga de muestrear los 16 pulsos LVDS provenientes de la interfaz ASD a la máxima frecuencia de reloj posible, para mantenerlos en un registro de desplazamiento (shift register) utilizado como buffer de datos. En este registro se mantendrán los datos muestreados a la espera de la señal de disparo para ser traspasados al siguiente módulo. Mientras no llegue la señal de disparo, los datos seguirán avanzando en el registro de desplazamiento, descartando automáticamente los datos más antiguos.
@@ -72,12 +72,12 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 			\label{fig:muon-daq}
 		\end{figure}
 		
-\section{Implementación del Sistema de Adquisición}
+\section{Implementación del sistema de adquisición}
 \label{sec:impl}
 	La implementación del sistema de adquisición de datos en el módulo TE0720 se realizó mediante el software Vivado Design Suite 2019.1 y Vivado SDK 2019.1 para la descripción de hardware en lógica programable y  para la programación de software en el procesador, respectivamente. En esta sección se presenta el funcionamiento general de cada módulo y el detalle técnico de implementación se encuentra disponible en el repositorio Git\cite{GonzalezMuonRepository}. Adicionalmente, el Apéndice \ref{cap:git} instruye cómo utilizar Git como sistema de control de versiones para proyectos de descripción de Hardware Vivado como el desarrollado en esta memoria de titulación.
 	
 	La descripción de hardware se llevó a cabo en el HDL (Hardware Description Language) SystemVerilog y la integración de cada módulo se hizo mediante \textit{Block Design}, correspondiente a un método de descripción de hardware en formato de diagrama de bloques, el cual permite automatizar algunos procesos de instanciación de módulos e interconexión de puertos. En la Figura \ref{fig:blockdesign} se ilustra el diagrama de bloques del sistema de adquisición implementado en el módulo TE0720, donde se observan los diferentes bloques utilizados. El bloque \textit{ZYNQ7 Processing System} corresponde al procesador, donde se ubica el módulo de comunicación. El bloque \textit{top\_wrapper} agrupa los módulos \textit{Sampler, Event Reader y Event Buffer}, que junto con los bloques \textit{FIFO Generator}, \textit{Clocking Wizard} y \textit{clk\_divider} corresponden a los módulos implementados en la lógica programable. Los módulos \textit{AXI GPIO} corresponden a los puertos de entrada de datos y salida de comandos del sistema de comunicación incluido al interior del procesador, donde el módulo \textit{axi\_gpio\_0} está asociado a los 32bits de entrada de datos, mientras que el módulo \textit{axi\_gpio\_1} corresponde a los 8 bits de salida para comandos de lectura. Los bloques \textit{Processor System Reset} y \textit{AXI Interconnect} son módulos auxiliares instanciados de manera automática por el software y permiten generar las señales de \textit{reset} y habilitar la comunicación con la GPIO del procesador respectivamente. Por último, la señal \textit{trigger} corresponde a la señal de disparo, mientras que los arreglos de señales \textit{Ch\_A\_P[15:0]} y \textit{Ch\_A\_N[15:0]} corresponden a los puertos de entrada para las señales de detección LVDS con sus terminales positivos y negativos respectivamente.
-	
+
 	\begin{figure}[H]
 		\centering
 		\includegraphics[scale=0.4,angle=90]{blockdesignv2.png}
@@ -85,7 +85,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 		\label{fig:blockdesign}
 	\end{figure}
 	
-	A continuación se detalla del desarrollo de cada módulo, su funcionamiento, los puertos asociados y sus diagramas pertinentes. \sgcnote{discutir detalles tecnicos una vez este entregado el informe.}
+	A continuación se detalla del desarrollo de cada módulo, su funcionamiento, los puertos asociados, sus diagramas pertinentes y finalmente la utilización de hardware asociada a la totalidad del diseño implementado. \sgcnote{discutir detalles tecnicos una vez este entregado el informe.}
 	
 	\subsection{Sampler}
 	\label{sec:sampling}
@@ -189,7 +189,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 	
 	Al detectar la señal de disparo, esta etapa registra los datos de todos los canales en un arreglo bidimensional y mantiene su estado hasta recibir la señal de que han sido guardados correctamente por la etapa siguiente. Mientras esto no suceda, el shift-register seguirá muestreando datos, pero se ignorarán las señales de disparo.
 	
-	La Figura \ref{fig:sampler} ilustra un diagrama simplificado del módulo \textit{Sampler} considerando la lógica para una sola señal LVDS entrante. %\sgcnote{especificar en alguna parte, quizas al inicio de la seccion o capitulo, que la descripcion entregada en el informe escrito es simplificada para dar un contexto, pero la implementacion se encuentra en un repositorio donde se pueden ver todos los detalles tecnicos.}
+	La Figura \ref{fig:sampler} ilustra un diagrama simplificado del módulo \textit{Sampler} considerando la lógica para una sola señal LVDS entrante.
 	
 	\begin{figure}[H]
 		\centering
@@ -228,9 +228,29 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 		\label{fig:com}
 	\end{figure}
 	
-	Siendo estas todas las etapas del sistema de adquisición de datos, es posible operar el sistema y capturar pulsos de prueba, leer los datos muestreados y contrastar la integridad de la información entre los pulsos iniciales y los datos leídos por comunicación serial.
-	
 	\sgcnote{Se hizo mencion al repositorio en caso de que se quieran ver mas detalles Esto ayudaria a darle mas fuerza al trabajo, y que no quede como que dijiste que lo hiciste, pero no hay pruebas.}\sjgnote{Asi es, lo menciono al inicio de la seccion de implementacion}
 	
+	\subsection{Utilización de recursos en el sistema implementado}
 	
+	La implementación de este sistema de adquisición significó la utilización de casi 23\% de la memoria BRAM disponible para la implementación del módulo \textit{Event Buffer}, como se indica en la Tabla \ref{tab:resources}. Se utilizaron 32 bloques de 36Kb cada uno para la implementación de la memoria FIFO asociada a los eventos provenientes de un detector. Sumado a que se utilizaron 33 puertos IO (32 puertos para señales LVDS y 1 para la señal de disparo) de los 152 accesibles desde la tarjeta de desarrollo Trenz, se tiene que el uso de recursos es menor al 25\% y da pie para implementar un sistema de adquisición para máximo 4 detectores antes de utilizar la totalidad de recursos de memoria disponibles.
 	
+	En cuanto a otros recursos utilizados listados en la Tabla \ref{tab:resources}, se usa un solo MMCM (Mixed-mode Clock Manager) y 3 BUFG (Global Clock Buffer) para la generación de relojes, no debiendo requerirse MMCM adicionales en una eventual expansión del sistema de adquisición dentro del mismo hardware. La utilización de Flip-flops representa aproximadamente un 6\% del total disponible, lo que corresponde a un bajo porcentaje de utilización considerando que son el principal recurso de hardware presente en el muestreo de señales digitales y en la escritura y lectura de eventos en memoria, significando una ventaja y abriendo la posibilidad a expandir la lógica programable. Así mismo, los porcentajes de utilización asociados a LUTs (Look-up Tables) y memoria distribuida (LUTRAM) presentes en la lógica combinacional son mínimos comparado con el total disponible, lo que da holgura para implementar sistemas aún más grandes y complejos.
+	
+	Luego de la implementación y análisis del sistema de adquisición de datos diseñado, es posible operar el sistema y capturar pulsos de prueba, leer los datos muestreados y contrastar la integridad de la información entre los pulsos iniciales y los datos leídos por comunicación serial como se realizará en el Capitulo \ref{cap:sim}.
+	
+	\begin{table}[]
+		\centering
+		\caption{Recursos de hardware utilizados en la implementación del sistema de adquisición.}
+		\label{tab:resources}
+		\begin{tabular}{lrrr}
+			\hline
+			\textbf{Recurso} & \multicolumn{1}{l}{\textbf{Utilización}} & \multicolumn{1}{l}{\textbf{Disponibilidad}} & \multicolumn{1}{l}{\textbf{Utilización {[}\%{]}}} \\ \hline
+			LUT    & 2.810 & 53.200  & 5,28  \\
+			LUTRAM & 80    & 17.400  & 0,46  \\
+			FF     & 6.439 & 106.400 & 6,05  \\
+			BRAM   & 32    & 140     & 22,86 \\
+			IO     & 33    & 200     & 16,50 \\
+			BUFG   & 3     & 32      & 9,38  \\
+			MMCM   & 1     & 4       & 25,00   
+		\end{tabular}
+	\end{table}
