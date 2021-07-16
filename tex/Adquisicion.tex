@@ -85,7 +85,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 		\label{fig:blockdesign}
 	\end{figure}
 	
-	A continuación se detalla del desarrollo de cada módulo, su funcionamiento, los puertos asociados, sus diagramas pertinentes y finalmente la utilización de hardware asociada a la totalidad del diseño implementado. \sgcnote{discutir detalles tecnicos una vez este entregado el informe.}
+	A continuación se detalla del desarrollo de cada módulo, su funcionamiento, los puertos asociados, sus diagramas pertinentes y finalmente la utilización de hardware asociada a la totalidad del diseño implementado. %\sgcnote{discutir detalles tecnicos una vez este entregado el informe.}
 	
 	\subsection{Sampler}
 	\label{sec:sampling}
@@ -93,12 +93,12 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 	El módulo \textit{Sampler} corresponde a la etapa de muestreo y discriminación, encargándose de recibir las señales digitales generadas por la interfaz ASD. Esta etapa muestrea cada señal entrante y asocia los datos a la señal de disparo correspondiente. Los principales objetivos de este módulo son:
 	
 	\begin{itemize}
-		\item Muestrear los pulsos digitales la frecuencia lo más cercana a 600MHz (máxima frecuencia sintetizable en la plataforma de desarrollo Vivado, limitada por el IP Core \textit{Clocking Wizard}\cite{Xilinx2021ClockingSuite} \sgcnote{es un maximo indicado por fabricante? Una limitacion de los IPs?  Especificar}).
+		\item Muestrear los pulsos digitales la frecuencia lo más cercana a 600MHz (máxima frecuencia sintetizable en la plataforma de desarrollo Vivado, limitada por el IP Core \textit{Clocking Wizard}\cite{Xilinx2021ClockingSuite} %\sgcnote{es un maximo indicado por fabricante? Una limitacion de los IPs?  Especificar}).
 		\item Mantener en memoria los pulsos muestreados mientras llega la señal de disparo.
 		\item Transferir los pulsos muestreados hacia la etapa siguiente al momento de detectar la señal de disparo.
 	\end{itemize}
 
-	Para interconectar la interfaz ASD con la tarjeta de desarrollo, se identificaron los conectores de cada dispositivo y se les asignaron etiquetas. Para el caso de la interfaz ASD se le asignó la letra ``A'' por ser la primera en ser conectada, nombrándose cada señal como ``JA-n'', donde ``n'' corresponde al número del pin de cada señal ubicada en el conector de 40 posiciones según la Tabla \ref{tab:asd-ports} \sgcnote{??} de la Sección \ref{sec:asd}.
+	Para interconectar la interfaz ASD con la tarjeta de desarrollo, se identificaron los conectores de cada dispositivo y se les asignaron etiquetas. Para el caso de la interfaz ASD se le asignó la letra ``A'' por ser la primera en ser conectada, nombrándose cada señal como ``JA-n'', donde ``n'' corresponde al número del pin de cada señal ubicada en el conector de 40 posiciones según la Tabla \ref{tab:asd-ports} de la Sección \ref{sec:asd}.
 	
 	En el caso de la tarjeta de desarrollo Trenz TE0703, esta cuenta con dos conectores tipo VG96. La nomenclatura para cada pin se ilustra en la Figura \ref{fig:trenz-layout}, destacándose en verde los pines escogidos para interconectar la interfaz ASD. Estos pines se escogieron estratégicamente con el fin de estar ubicados en un extremo accesible, con puertos cercanos entre si, ordenados de manera consecutiva, y dejando espacio disponible para conectar otros detectores en el futuro.
 	
@@ -111,7 +111,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 	
 	En la lógica programable, cada señal se recibe en los arreglo de puertos ``Ch\_A\_P[15:0]'' y ``Ch\_A\_N[15:0]'', donde ``Ch'' significa canal, ``A'' indica que corresponden la interfaz de lectura ``A'', ``P'' indica que son señales de polaridad positiva y ``N'' significa que son señales de polaridad negativa.
 	
-	En base a las nomenclaturas anteriores e incluyendo los propios nombres de los pines descritos en los esquemáticos eléctricos de la tarjeta de desarrollo TE0703\cite{TrenzElectronicGmbHTE0703SCH-TE0703-06} y los pines internos de la Zynq, se realizó la interconexión ASD-Zynq según lo indicado en la Tabla \ref{tab:zynq-asd} \sgcnote{Normalmente los caption de las tablas van sobre la tabla.}.
+	En base a las nomenclaturas anteriores e incluyendo los propios nombres de los pines descritos en los esquemáticos eléctricos de la tarjeta de desarrollo TE0703\cite{TrenzElectronicGmbHTE0703SCH-TE0703-06} y los pines internos de la Zynq, se realizó la interconexión ASD-Zynq según lo indicado en la Tabla \ref{tab:zynq-asd}.
 	
 	\begin{table}[]
 		\centering
@@ -179,7 +179,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 		\label{tab:zynq-asd}
 	\end{table}
 	
-	Una vez definida la nomenclatura de puertos, es posible interconectar las tarjetas y proceder con la toma de muestras. Para capturar las señales LVDS, se declaran puertos IBUFDS (Input Buffer for Differential Signals) \cite{Xilinx2012XilinxDesigns} en la lógica programable, configurándolos para recibir señales LVDS de 2.5V y activando la resistencia interna de 100$\Omega$ para adaptar la terminación al estándar diferencial. Luego de ser capturar las señales LVDS\sgcnote{escritura}, estas se sincronizan con el reloj del circuito pasando a través de dos Flip-flops consecutivos (Synchonizer). En el Apéndice \ref{cap:lvds} se tratan más detalles relativos a la interconexión de puertos LVDS entre la interfaz ASD y productos de la familia Xilinx 7 Series.
+	Una vez definida la nomenclatura de puertos, es posible interconectar las tarjetas y proceder con la toma de muestras. Para capturar las señales LVDS, se declaran puertos IBUFDS (Input Buffer for Differential Signals) \cite{Xilinx2012XilinxDesigns} en la lógica programable, configurándolos para recibir señales LVDS de 2.5V y activando la resistencia interna de 100$\Omega$ para adaptar la terminación al estándar diferencial. Luego de ser capturar las señales LVDS, estas se sincronizan con el reloj del circuito pasando a través de dos Flip-flops consecutivos (Synchonizer). En el Apéndice \ref{cap:lvds} se presentan más detalles relativos a la interconexión de puertos LVDS entre la interfaz ASD y productos de la familia Xilinx 7 Series.
 	
 	El muestreo de las señales se realiza a 400MHz por ser la frecuencia más alta sintetizable antes de producir errores de \textit{timing} en los períodos de \textit{setup} de señales asociadas a los módulos \textit{Sampler} y \textit{Event Buffer}, y en señales de alto \textit{fan-out} como la señal de reset del sistema completo (determinado experimentalmente siguiendo procedimientos y recomendaciones propias de la herramienta de diseño). La frecuencia de muestreo de 400MHz da una resolución de tiempo de 2,5ns para distinguir el ancho de los pulsos digitales, lo cual satisface los requerimientos descritos en la Sección \ref{sec:arq}.
 	
@@ -202,7 +202,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 	\subsection{Event Buffer}
 	\label{sec:buffer}
 	
-	El buffer de eventos se encarga de almacenar provisoriamente los eventos entrantes en una memoria FIFO hasta que la etapa siguiente solicite la entrega de los eventos capturados. La frecuencia de operación escogida para el buffer es de 100MHz, facilitando la implementación de esta y las siguientes etapas al ser una de las frecuencias base de la tarjeta Trenz y por ser una frecuencia cerca de 600 veces más alta que el ratio de eventos detectados por minuto (1 evento por minuto en cada canal de detección). Operar el buffer de eventos a los 400MHz asociados a la etapa de muestreo requiere otras consideraciones de diseño, como por ejemplo implementar \textit{pipelines} y declarar \textit{constraints} de tiempo específicas para este propósito\cite{XilinxFIFOSuite}. \sgcnote{De donde viene esta limitacion? Esta indicado por el fabricante o es un tema de diseno?}
+	El buffer de eventos se encarga de almacenar provisoriamente los eventos entrantes en una memoria FIFO hasta que la etapa siguiente solicite la entrega de los eventos capturados. La frecuencia de operación escogida para el buffer es de 100MHz, facilitando la implementación de esta y las siguientes etapas al ser una de las frecuencias base de la tarjeta Trenz y por ser una frecuencia cerca de 600 veces más alta que el ratio de eventos detectados por minuto (1 evento por minuto en cada canal de detección). Operar el buffer de eventos a los 400MHz asociados a la etapa de muestreo requiere otras consideraciones de diseño, como por ejemplo implementar \textit{pipelines} y declarar \textit{constraints} de tiempo específicas para este propósito\cite{XilinxFIFOSuite}. 
 	
 	Si se recibe una señal de disparo, el \textit{Event Buffer} procede a leer los datos provenientes de la etapa anterior (\textit{Sampler}). En cada ciclo de reloj se guarda en la memoria FIFO la última fila del arreglo bidimensional que representa al evento seleccionado. Una vez que la información es almacenada en memoria, se desplazan los datos del arreglo bidimensional (Shift) y se repite el ciclo 16 veces. Así, en la memoria FIFO cada dirección de memoria corresponderá a canales consecutivos de un mismo evento, donde cada canal es representado en 64 bits de datos. Se decidió operar de esta manera para simplificar la implementación del hardware y debido a que no es posible almacenar un arreglo bidimensional en una sola dirección de memoria FIFO. Además, se escogió una memoria FIFO para implementar este buffer por adecuarse bien a la naturaleza de los datos: el orden de los eventos es importante y con esta memoria los eventos son leídos por orden de llegada. Además, esta memoria permite el almacenamiento de mas de 50 eventos y sus respectivos canales.
 	
@@ -228,7 +228,7 @@ En este capítulo se presenta la arquitectura propuesta para la implementación 
 		\label{fig:com}
 	\end{figure}
 	
-	\sgcnote{Se hizo mencion al repositorio en caso de que se quieran ver mas detalles Esto ayudaria a darle mas fuerza al trabajo, y que no quede como que dijiste que lo hiciste, pero no hay pruebas.}\sjgnote{Asi es, lo menciono al inicio de la seccion de implementacion}
+%	\sgcnote{Se hizo mencion al repositorio en caso de que se quieran ver mas detalles Esto ayudaria a darle mas fuerza al trabajo, y que no quede como que dijiste que lo hiciste, pero no hay pruebas.}\sjgnote{Asi es, lo menciono al inicio de la seccion de implementacion}
 	
 	\subsection{Utilización de recursos en el sistema implementado}
 	
