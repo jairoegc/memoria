@@ -1,0 +1,55 @@
+\babel@toc {spanish}{}
+\contentsline {chapter}{\uppercase {Agradecimientos}}{\es@scroman {i}}{chapter*.2}%
+\contentsline {chapter}{\uppercase {Resumen}}{\es@scroman {iii}}{chapter*.3}%
+\contentsline {chapter}{\uppercase {Abstract}}{\es@scroman {iv}}{chapter*.4}%
+\contentsline {chapter}{\uppercase {\IeC {\'I}NDICE DE FIGURAS}}{\es@scroman {vii}}{chapter*.5}%
+\contentsline {chapter}{\uppercase {\IeC {\'I}NDICE DE TABLAS}}{\es@scroman {x}}{chapter*.6}%
+\contentsline {chapter}{\numberline {1}\uppercase {Introducci\IeC {\'o}n}}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Contexto general}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Motivaci\IeC {\'o}n}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Planteamiento del problema}{4}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Alcances y contribuciones}{6}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Organizaci\IeC {\'o}n del documento.}{8}{section.1.5}%
+\contentsline {chapter}{\numberline {2}\uppercase {estado del arte}}{9}{chapter.2}%
+\contentsline {section}{\numberline {2.1}LabPet II}{9}{section.2.1}%
+\contentsline {section}{\numberline {2.2}4D PET}{11}{section.2.2}%
+\contentsline {section}{\numberline {2.3}ATLAS}{12}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Discusi\IeC {\'o}n sobre alternativas existentes}{16}{section.2.4}%
+\contentsline {chapter}{\numberline {3}\uppercase {sistema de detecci\IeC {\'o}n}}{18}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Detector de Part\IeC {\'\i }culas}{18}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Estructura general}{19}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Detector sTGC utilizado}{21}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Procedimiento de operaci\IeC {\'o}n y pruebas}{22}{subsection.3.1.3}%
+\contentsline {subsubsection}{\numberline {A}Dispositivos para lectura de se\IeC {\~n}ales}{24}{subsubsection.3.1.3.1}%
+\contentsline {subsubsection}{\numberline {B}Estimaci\IeC {\'o}n de ruido base}{24}{subsubsection.3.1.3.2}%
+\contentsline {subsubsection}{\numberline {C}Observaci\IeC {\'o}n de falsas detecciones}{25}{subsubsection.3.1.3.3}%
+\contentsline {subsubsection}{\numberline {D}Detecci\IeC {\'o}n de part\IeC {\'\i }culas}{25}{subsubsection.3.1.3.4}%
+\contentsline {section}{\numberline {3.2}Interfaz de Lectura}{25}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Circuito interno de Amplificaci\IeC {\'o}n, Acondicionamiento y Discriminaci\IeC {\'o}n}{28}{subsection.3.2.1}%
+\contentsline {chapter}{\numberline {4}\uppercase {sistema de adquisici\IeC {\'o}n}}{30}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Arquitectura propuesta}{30}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Esquema general del sistema de adquisici\IeC {\'o}n propuesto}{32}{subsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.1.2}Plataforma de desarrollo utilizada}{32}{subsection.4.1.2}%
+\contentsline {subsection}{\numberline {4.1.3}Sistema de adquisici\IeC {\'o}n propuesto}{34}{subsection.4.1.3}%
+\contentsline {section}{\numberline {4.2}Implementaci\IeC {\'o}n del sistema de adquisici\IeC {\'o}n}{35}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Sampler}{38}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Event Buffer}{42}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Event Reader y Comunicaci\IeC {\'o}n}{43}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Utilizaci\IeC {\'o}n de recursos en el sistema implementado}{44}{subsection.4.2.4}%
+\contentsline {chapter}{\numberline {5}\uppercase {Evaluaci\IeC {\'o}n experimental}}{46}{chapter.5}%
+\contentsline {chapter}{\numberline {6}\uppercase {conclusion}}{53}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Conclusiones}{53}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Trabajo futuro}{55}{section.6.2}%
+\contentsline {chapter}{\numberline {A}\uppercase {Conexi\IeC {\'o}n de se\IeC {\~n}ales LVDS en Familia de Productos Xilinx 7 Series}}{56}{appendix.Alph1}%
+\contentsline {section}{\numberline {A.1}Acerca del est\IeC {\'a}ndar LVDS}{56}{section.Alph1.1}%
+\contentsline {section}{\numberline {A.2}Interconexi\IeC {\'o}n LVDS para hardware Xilinx 7 Series}{58}{section.Alph1.2}%
+\contentsline {section}{\numberline {A.3}Descripci\IeC {\'o}n de hardware para utilizaci\IeC {\'o}n de puertos LVDS}{58}{section.Alph1.3}%
+\contentsline {chapter}{\numberline {B}\uppercase {Control de versiones de proyectos Vivado con Git}}{60}{appendix.Alph2}%
+\contentsline {section}{\numberline {B.1}Creaci\IeC {\'o}n de un repositorio Git}{60}{section.Alph2.1}%
+\contentsline {section}{\numberline {B.2}Clonaci\IeC {\'o}n de un repositorio Git}{61}{section.Alph2.2}%
+\contentsline {section}{\numberline {B.3}Creaci\IeC {\'o}n de los archivos y carpetas iniciales}{62}{section.Alph2.3}%
+\contentsline {section}{\numberline {B.4}Preparaci\IeC {\'o}n del proyecto Vivado}{63}{section.Alph2.4}%
+\contentsline {section}{\numberline {B.5}Exportar script Tcl}{63}{section.Alph2.5}%
+\contentsline {section}{\numberline {B.6}Editar script Tcl}{63}{section.Alph2.6}%
+\contentsline {section}{\numberline {B.7}Confirmar y subir los archivos al repositorio remoto}{65}{section.Alph2.7}%
+\contentsline {chapter}{\uppercase { Referencias}}{66}{appendix*.49}%

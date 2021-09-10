@@ -1,0 +1,89 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: Memoria.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: IEEEtran.bst
+Reallocating 'name_of_file' (item size: 1) to 11 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: references.bib
+Warning--I didn't find a database entry for ""
+-- IEEEtran.bst version 1.14 (2015/08/26) by Michael Shell.
+-- http://www.michaelshell.org/tex/ieeetran/bibtex/
+-- See the "IEEEtran_bst_HOWTO.pdf" manual for usage information.
+Warning--missing institution in Chapman2014ATLASUpgrade
+Warning--empty journal in DeSmet2011StudyLab
+Warning--missing institution in Xilinx7UG471
+Warning--empty year in Xilinx7UG471
+Warning--missing institution in DeUndergraduatePhysics
+Warning--empty year in DeUndergraduatePhysics
+Warning--missing institution in AlvarezSearchPyramids
+Warning--empty year in AlvarezSearchPyramids
+Warning--missing institution in Naseri2021ATLASILC
+Warning--empty author in 1999ATLASICs
+Warning--missing institution in 1999ATLASICs
+Warning--empty author in 1996IEEESociety
+Warning--missing institution in 1996IEEESociety
+Warning--missing institution in Xilinx2012Zynq-7000Architecture
+Warning--missing institution in Xilinx20107DS180
+Warning--missing institution in XilinxFIFOSuite
+Warning--empty year in XilinxFIFOSuite
+Warning--missing institution in Xilinx2021ClockingSuite
+Warning--missing institution in Xilinx2012XilinxDesigns
+Warning--missing institution in XilinxVirtualSuite
+Warning--empty year in XilinxVirtualSuite
+Warning--missing institution in XilinxIntegratedPG172
+Warning--empty year in XilinxIntegratedPG172
+Warning--missing institution in RittDRS4Array
+Warning--empty year in RittDRS4Array
+Warning--missing institution in XilinxUltraFastGuide
+Warning--empty year in XilinxUltraFastGuide
+Warning--missing institution in Xilinx20147Guide
+Warning--missing institution in Xilinx2011Artix-7Characteristics
+
+Done.
+You've used 39 entries,
+            4087 wiz_defined-function locations,
+            1023 strings with 18780 characters,
+and the built_in function-call counts, 29016 in all, are:
+= -- 1799
+> -- 1531
+< -- 77
++ -- 770
+- -- 362
+* -- 1468
+:= -- 4088
+add.period$ -- 80
+call.type$ -- 39
+change.case$ -- 40
+chr.to.int$ -- 177
+cite$ -- 68
+duplicate$ -- 2103
+empty$ -- 2150
+format.name$ -- 383
+if$ -- 6533
+int.to.chr$ -- 0
+int.to.str$ -- 39
+missing$ -- 639
+newline$ -- 176
+num.names$ -- 38
+pop$ -- 1731
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 2
+skip$ -- 2006
+stack$ -- 0
+substring$ -- 451
+swap$ -- 1686
+text.length$ -- 18
+text.prefix$ -- 0
+top$ -- 5
+type$ -- 39
+warning$ -- 29
+while$ -- 64
+width$ -- 41
+write$ -- 383
+(There were 30 warnings)

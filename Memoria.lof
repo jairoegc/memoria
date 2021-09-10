@@ -1,0 +1,47 @@
+\babel@toc {spanish}{}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {1.1}{\ignorespaces Representaci\IeC {\'o}n art\IeC {\'\i }stica de rayos c\IeC {\'o}smicos y lluvia de part\IeC {\'\i }culas subat\IeC {\'o}micas sobre la corteza terrestre.\relax }}{3}{figure.caption.7}%
+\contentsline {figure}{\numberline {1.2}{\ignorespaces Diagrama del experimento ATLAS. CCTVal colabora en la actualizaci\IeC {\'o}n de la zona indicada como "New small Wheel", que contiene detectores sTGC.\relax }}{4}{figure.caption.8}%
+\contentsline {figure}{\numberline {1.3}{\ignorespaces Fotograf\IeC {\'\i }a correspondiente al montaje de detectores sTGC en la New Small Wheel del proyecto ATLAS.\relax }}{5}{figure.caption.9}%
+\contentsline {figure}{\numberline {1.4}{\ignorespaces Fotograf\IeC {\'\i }a de la fabricaci\IeC {\'o}n de detectores sTGC en laboratorios de CCTVal. Cada una de las placas observadas en la imagen corresponde a capas constitutivas de un detector.\relax }}{6}{figure.caption.10}%
+\contentsline {figure}{\numberline {1.5}{\ignorespaces Diagrama del sistema de muongraf\IeC {\'\i }a de terreno utilizando un solo detector.\relax }}{7}{figure.caption.11}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces Diagrama de bloques del sistema de adquisici\IeC {\'o}n de datos para LabPET II \cite {Njejimana2013DesignImaging}.\relax }}{10}{figure.caption.12}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Diagrama de bloques del sistema de adquisici\IeC {\'o}n de datos para Detector PET 4D \cite {Marcatili2011DevelopmentDetector}.\relax }}{12}{figure.caption.13}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Layout del experimento ATLAS, donde se indica la posici\IeC {\'o}n de la Small Wheel y la Big Wheel\cite {Formenti2018CERNReport}.\relax }}{13}{figure.caption.14}%
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Diagrama de la interfaz de captura para detectores de muones TGC \cite {Spieler2012ElectronicsAcquisition}. Los muones se representan con el s\IeC {\'\i }mbolo $\mu $. Existen 3 capas de detectores, por lo tanto se observan 3 bloques que incluyen retardos, selecci\IeC {\'o}n y captura de los pulsos.\relax }}{14}{figure.caption.15}%
+\contentsline {figure}{\numberline {2.5}{\ignorespaces Diagrama del sistema de disparo y adquisici\IeC {\'o}n de datos en el experimento ATLAS \cite {Colombo2015Data-flowCase}.\relax }}{15}{figure.caption.16}%
+\contentsline {figure}{\numberline {2.6}{\ignorespaces Diagrama de la tarjeta de lectura ROBIN en ATLAS \cite {Whiteson2016TheSystem}.\relax }}{15}{figure.caption.17}%
+\contentsline {figure}{\numberline {2.7}{\ignorespaces Diagrama de bloques de la FPGA en ROBIN \cite {Whiteson2016TheSystem}.\relax }}{16}{figure.caption.18}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Diagrama del sistema de muongraf\IeC {\'\i }a de terreno utilizando un solo detector.\relax }}{19}{figure.caption.19}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Estructura interna de un detector sTGC\cite {Chapman2014ATLASUpgrade}.\relax }}{20}{figure.caption.20}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces L\IeC {\'\i }neas de campo el\IeC {\'e}ctrico observadas en un corte transversal de los cables y c\IeC {\'a}todos del detector. Los c\IeC {\'a}todos se ilustran en celeste, los cables se representan como puntos negros, y las lineas de campo corresponden a las flechas de color rojo\cite {DeSmet2011StudyLab}.\relax }}{21}{figure.caption.21}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Estructura interna de un detector sTGC adaptado para este proyecto de titulaci\IeC {\'o}n. El gas es contenido entre ambas capas de grafito (c\IeC {\'a}todos). Los cables internos corresponden a los \IeC {\'a}nodos.\relax }}{22}{figure.caption.22}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Vista superior del detector prototipo.\relax }}{23}{figure.caption.23}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Vista superior del detector, en donde se indican las etiquetas asociadas a cada canal en funci\IeC {\'o}n del eje al que pertenece. Cada cuadro representa un \IeC {\'a}rea de detecci\IeC {\'o}n de 1cm$^2$.\relax }}{23}{figure.caption.24}%
+\contentsline {figure}{\numberline {3.7}{\ignorespaces Interfaz de lectura ASD. Se destacan en la imagen sus canales (hit) del 0 al 15, su salida anal\IeC {\'o}gica LEMO y el primer pin en su conector de 40 posiciones.\relax }}{26}{figure.caption.25}%
+\contentsline {figure}{\numberline {3.8}{\ignorespaces Diagrama de bloques del circuito principal para un canal de la interfaz ASD. Se indican la etapa de preamplificaci\IeC {\'o}n, el amplificador principal de ganancia 7, y el comparador.\relax }}{29}{figure.caption.27}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Diagrama del esquema general para el sistema de adquisici\IeC {\'o}n a dise\IeC {\~n}ar. El disparo corresponde a la se\IeC {\~n}al digital que indica si la part\IeC {\'\i }cula detectada es un muon, mientras que la se\IeC {\~n}al digital corresponde al pulso captado por el detector, luego de haber pasado por la interfaz de lectura. Los datos son la informaci\IeC {\'o}n asociada a eventos seleccionados, que ser\IeC {\'a}n enviados a un dispositivo externo.\relax }}{32}{figure.caption.28}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Tarjeta de desarrollo y m\IeC {\'o}dulo Zynq a utilizar. A la izquierda se ilustra la placa de desarrollo Trenz TR0703\cite {TrenzElectronic2019TE0703Wiki} y a su derecha se ilustra el m\IeC {\'o}dulo que va montado en ella: Trenz TR0720\cite {TrenzElectronic2020TE0720Wiki} que contiene un SoC Zynq 7000\cite {Xilinx2012Zynq-7000Architecture}.\relax }}{34}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Diagrama de la arquitectura de hardware propuesta para el dise\IeC {\~n}o de un sistema de adquisici\IeC {\'o}n de datos asociado a un solo detector de muones.\relax }}{35}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Block Design del sistema de adquisici\IeC {\'o}n de datos implementado en el m\IeC {\'o}dulo TE0720.\relax }}{37}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Diagrama de la vista superior de la tarjeta de desarrollo utilizada, indicando la nomenclatura de los pines correspondientes a sus conectores VG96. Los pines utilizados para conectar la interfaz ASD se encuentran destacados en verde, enmarcados en el recuadro rojo.\relax }}{39}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Diagrama simplificado del m\IeC {\'o}dulo \textit {Sampler}, ejemplificado para una sola se\IeC {\~n}al LVDS.\relax }}{42}{figure.caption.34}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Diagrama simplificado del m\IeC {\'o}dulo \textit {Event Buffer}.\relax }}{43}{figure.caption.35}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Diagrama simplificado del m\IeC {\'o}dulo \textit {Event Reader} y el m\IeC {\'o}dulo de comunicaci\IeC {\'o}n en el procesador.\relax }}{44}{figure.caption.36}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Configuraci\IeC {\'o}n experimental para la emulaci\IeC {\'o}n de pulsos digitales y monitoreo del sistema de adquisici\IeC {\'o}n implementado.\relax }}{47}{figure.caption.38}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Ejemplo de uno de los 36 eventos, correspondiente al evento de prueba n\IeC {\'u}mero 10. \relax }}{48}{figure.caption.39}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Captura de pantalla de la interfaz ILA, donde se ilustra la recepci\IeC {\'o}n del primer evento de prueba.\relax }}{49}{figure.caption.40}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Captura de pantalla de la interfaz ILA, donde se ilustra la recepci\IeC {\'o}n del cuarto evento de prueba.\relax }}{50}{figure.caption.41}%
+\addvspace {10pt}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {A.1}{\ignorespaces Comparaci\IeC {\'o}n de una se\IeC {\~n}al diferencial interpret\IeC {\'a}ndola como terminales independientes y como terminales diferenciales.\relax }}{57}{figure.caption.43}%
+\contentsline {figure}{\numberline {A.2}{\ignorespaces Conexi\IeC {\'o}n entre un emisor y receptor LVDS, ubicados a la izquierda y derecha de la imagen respectivamente\cite {Xilinx7UG471}.\relax }}{58}{figure.caption.44}%
+\addvspace {10pt}
+\contentsline {figure}{\numberline {B.1}{\ignorespaces Bot\IeC {\'o}n ``New'' para la creaci\IeC {\'o}n de un nuevo repositorio remoto en \textit {Github.com}.\relax }}{61}{figure.caption.45}%
+\contentsline {figure}{\numberline {B.2}{\ignorespaces Bot\IeC {\'o}n ``Code'' para acceder al enlace de clonaci\IeC {\'o}n del repositorio.\relax }}{62}{figure.caption.46}%
+\contentsline {figure}{\numberline {B.3}{\ignorespaces Men\IeC {\'u} de configuraci\IeC {\'o}n para la habilitaci\IeC {\'o}n de IP Containers en Vivado.\relax }}{64}{figure.caption.47}%
+\contentsline {figure}{\numberline {B.4}{\ignorespaces Ventana de Vivado para la exportaci\IeC {\'o}n de un script Tcl.\relax }}{64}{figure.caption.48}%

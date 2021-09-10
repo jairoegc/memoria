@@ -11,6 +11,7 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 \subsection{Estructura general} 
 	Un sTGC está compuesto por dos planos de grafito (cátodos), con múltiples cables en medio (ánodos)\cite{Formenti2018CERNReport}, tal como se observa en la Figura \ref{img:stgc-structure}. Recubriendo el exterior de ambos cátodos se ubican capas aislantes que separan los cátodos de las zonas conductoras, llamadas ``\textit{pads}'' en la cara superior y ``\textit{strips}'' en la cara inferior del detector, diferenciándose en la forma y área que abarca cada uno. Los \textit{strips} corresponden a delgados rectángulos de cobre, mientras que los \textit{pads} son mantos de cobre más anchos, equivalentes al área de varios \textit{strips}. Los cables al interior del detector se encuentran orientados perpendicularmente respecto a los \textit{strips} y en paralelo a los \textit{pads}.
 	
+	\newpage
 	Al interior del detector, entre los planos de grafito, se infiltra un gas compuesto por dióxido de carbono y n-pentano\cite{Formenti2018CERNReport}. Mediante la aplicación de alto voltaje se genera un campo eléctrico entre ánodos y cátodos. Se utilizan 3000 V$_{DC}$ entre cátodos y ánodos para generar el campo eléctrico, limitando la corriente a 50uA. El gas en el interior puede ser dióxido de carbono puro, pero esto genera mayor probabilidad de generar descargas no asociadas a muones. La Figura \ref{img:stgc-field} representa un corte transversal de un detector y sus líneas de campo eléctrico desde ánodo (cables) hasta cátodos (lámina de grafito superior e inferior). 
 	
 	El paso de muones a través del detector genera la ionización del gas y la liberación de electrones, los cuales son captados por los cables del detector gracias al campo eléctrico. El flujo de electrones en el gas ionizado genera pulsos de corriente en los cables, produciendo diferencia de potencial en los cátodos. Esta diferencia de potencial interactúa con los \textit{pads} y \textit{strips} en el exterior del detector, generando pulsos de voltaje en estas zonas conductoras, pero con polaridad inversa respecto a la corriente presente en los cables. En la Figura \ref{fig:sistema-completo}, el pulso de voltaje correspondiente a la señal de salida de un canal de detección está representado por el pulso verde dibujado en la zona central de la imagen.
@@ -20,7 +21,7 @@ La detección de muones en este proyecto es realizada mediante un detector de pa
 	\begin{figure}[h]
 		\centering
 		\includegraphics[scale=0.3]{stgc-transversal.png}
-		\caption{Lineas de campo eléctrico observadas en un corte transversal de los cables y cátodos del detector. Los cátodos se ilustran en celeste, los cables se representan como puntos negros, y las lineas de campo corresponden a las flechas de color rojo\cite{DeSmet2011StudyLab}.}
+		\caption{Líneas de campo eléctrico observadas en un corte transversal de los cables y cátodos del detector. Los cátodos se ilustran en celeste, los cables se representan como puntos negros, y las lineas de campo corresponden a las flechas de color rojo\cite{DeSmet2011StudyLab}.}
 		\label{img:stgc-field}
 	\end{figure}
 
